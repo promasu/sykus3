@@ -161,7 +161,7 @@ GEM
     uuidtools (2.1.4)
     vegas (0.1.11)
       rack (>= 1.0.0)
-    yard (0.8.7.3)
+    yard (0.9.20)
 
 PLATFORMS
   ruby
