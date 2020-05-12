@@ -1,0 +1,7 @@
+name: LibreOffice Calc
+category: Büro
+text: >-
+  LibreOffice Calc ist ein Tabellenkalkulationsprogramm.
+default: true
+apt: [ libreoffice-calc, libreoffice-gtk, libreoffice-l10n-de ]
+

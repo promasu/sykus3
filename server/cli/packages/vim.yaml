@@ -1,0 +1,8 @@
+name: VIM
+category: Texteditor
+text: >-
+  VIM ist ein erweiterter Texteditor, der besonders
+  zum Programmieren geeignet ist.
+default: false
+apt: [ vim ]
+

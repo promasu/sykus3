@@ -1,0 +1,38 @@
+<div class="col-xs-12">
+  <div class="lead">
+    {{iWebfilter.categoryListTitle}}
+  </div>
+
+  <div id="CategoryListTable">
+    <div class="row margin-row">
+      {{>gridFilter}}
+
+      <div class="col-lg-6 col-sm-4 col-xs-12 text-right">
+        <button type="button" class="btn btn-primary js-btn-search">
+          {{iWebfilter.categorySearchBtn}}
+        </button>
+      </div>
+    </div>
+
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th data-sort-field="name">{{iWebfilter.categoryName}}</th>
+          <th data-sort-field="text">{{iWebfilter.categoryText}}</th>
+          <th data-sort-field="default">{{iWebfilter.categoryDefault}}</th>
+          <th data-sort-field="selected">{{iWebfilter.categorySelected}}</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="100">
+            {{iGrid.noResults}}
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+

@@ -1,0 +1,300 @@
+<div id="headWrapper">
+  <div id="head" class="container">
+    <h3 class="h4 pull-right js-school-name"></h3>
+    <h3>
+      <a href="http://sykus.net/" target="_blank">Sykus 3</a>
+    </h3>
+  </div>
+</div>
+
+<div id="navWrapper">
+  <div class="container">
+    <div class="row">
+      <div id="topNav" class="col-xs-12">
+        <ul class="js-nav-panel hide" data-id="login">
+          <li class="js-nav-module" data-id="login">
+          <a href="#session/Login!dashboard">
+            <i class="icon-signin"></i> {{iNav.loginLogin}}
+          </a>
+          </li>   
+        </ul>
+
+        <ul class="js-nav-panel hide" data-id="cli">
+          <li class="js-nav-module" data-id="login">
+          <a href="#cli/Start">
+            <i class="icon-signin"></i> {{iNav.cliLogin}}
+          </a>
+          </li>   
+          <li class="js-nav-module hide" data-id="locallogin">
+          <a href="#" class="js-locallogin">
+            <i class="icon-home"></i> {{iNav.cliLocalLogin}}
+          </a>
+          </li>   
+          <li class="js-nav-module" data-id="reboot">
+          <a href="#" class="js-reboot">
+            <i class="icon-refresh"></i> {{iNav.cliReboot}}
+          </a>
+          </li>
+          <li class="js-nav-module" data-id="poweroff">
+          <a href="#" class="js-poweroff">
+            <i class="icon-off"></i> {{iNav.cliPoweroff}}
+          </a>
+          </li>
+        </ul>
+
+        <ul class="js-nav-panel hide" data-id="user">
+          <li class="js-nav-module" data-id="dashboard">
+          <a href="#dashboard">
+            <i class="icon-dashboard"></i> {{iNav.userDashboard}}
+          </a>
+          </li>   
+          <li class="js-nav-module hide js-demo todo" data-id="messages">
+          <a href="#demo">
+            <i class="icon-envelope-alt"></i> {{iNav.userMessages}}
+          </a>
+          </li>
+          <li class="js-nav-module" data-id="files">
+          <a href="#files/View!home"> 
+            <i class="icon-folder-open"></i> {{iNav.userFiles}}
+          </a>
+          </li>
+          <li class="js-nav-module" data-id="teacher">
+          <a href="#teacher/RoomCtl">
+            <i class="icon-briefcase"></i> {{iNav.userTeacher}}
+          </a>
+          </li>
+          <li class="js-nav-module" data-id="admin">
+          <a href="#admin/users/UserList">
+            <i class="icon-cogs"></i> {{iNav.userAdmin}}
+          </a>
+          </li>
+          <li class="js-nav-module" data-id="logout">
+          <a href="#session/Logout">
+            <i class="icon-signout"></i> {{iNav.userLogout}}
+          </a>
+          </li>
+
+        </ul>
+
+        <ul class="js-nav-panel hide" data-id="admin">
+          <li class="js-nav-module hide todo" data-id="dashboard">
+          <a href="#admin/dashboard/Main">
+            <i class="icon-dashboard"></i> {{iNav.adminDashboard}}
+          </a>
+          </li>   
+          <li class="js-nav-module" data-id="users">
+          <a href="#admin/users/UserList">
+            <i class="icon-user"></i> {{iNav.adminUsers}}
+          </a>
+          </li>
+          <li class="js-nav-module" data-id="hosts">
+          <a href="#admin/hosts/HostList">
+            <i class="icon-desktop"></i> {{iNav.adminHosts}}
+          </a>
+          </li>
+          <li class="js-nav-module" data-id="printers">
+          <a href="#admin/printers/PrinterList">
+            <i class="icon-print"></i> {{iNav.adminPrinters}}
+          </a>
+          </li>
+          <li class="js-nav-module" data-id="webfilter">
+          <a href="#admin/webfilter/Categories">
+            <i class="icon-filter"></i> {{iNav.adminWebfilter}}
+          </a>
+          </li>
+          <li class="js-nav-module" data-id="logs">
+          <a href="#admin/logs/ServiceLogs">
+            <i class="icon-reorder"></i> {{iNav.adminLogs}}
+          </a>
+          </li>
+          <li class="js-nav-module" data-id="config">
+          <a href="#admin/config/Main">
+            <i class="icon-cog"></i> {{iNav.adminConfig}}
+          </a>
+          </li>
+          <li class="js-nav-module" data-id="back">
+          <a href="#dashboard">
+            <i class="icon-share-alt"></i> {{iNav.adminBack}}
+          </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+  <div class="container" id="subNavContainer">
+    <div class="row">
+      <div id="subNav">
+        <ul class="js-nav-module-list hide" data-id="login">
+          <li class="js-nav-submodule" style="visibility: hidden">
+          <a href="#"><i class="icon-beer"></i></a>
+          </li>
+        </ul>
+
+        <ul class="js-nav-module-list hide" data-id="users">
+          <li class="js-nav-submodule" data-id="users">
+          <a href="#admin/users/UserList">
+            <i class="icon-th-list"></i> {{iNav.adminUsersUsers}}
+          </a>
+          </li>
+          <li class="js-nav-submodule" data-id="usergroups">
+          <a href="#admin/users/UserGroupList">
+            <i class="icon-group"></i> {{iNav.adminUsersUserGroups}}
+          </a>
+          </li>      
+          <li class="js-nav-submodule" data-id="userclasses">
+          <a href="#admin/users/UserClasses">
+            <i class="icon-book"></i> {{iNav.adminUsersUserClasses}}
+          </a>
+          </li>
+          <li class="js-nav-submodule" data-id="userimport">
+          <a href="#admin/users/UserImport">
+            <i class="icon-download-alt"></i> {{iNav.adminUsersUserImport}}
+          </a>
+          </li>
+          <li class="js-nav-submodule" data-id="initialpasswords">
+          <a href="#admin/users/InitialPasswords">
+            <i class="icon-key"></i> 
+            {{iNav.adminUsersInitialPasswords}}
+          </a>
+          </li>
+        </ul>
+
+        <ul class="js-nav-module-list hide" data-id="hosts">
+          <li class="js-nav-submodule" data-id="hosts">
+          <a href="#admin/hosts/HostList">
+            <i class="icon-th-list"></i> {{iNav.adminHostsHosts}}
+          </a>
+          </li>
+          <li class="js-nav-submodule" data-id="hostgroups">
+          <a href="#admin/hosts/HostGroups">
+            <i class="icon-group"></i> {{iNav.adminHostsHostGroups}}
+          </a>
+          </li>      
+          <li class="js-nav-submodule" data-id="packages">
+          <a href="#admin/hosts/Packages">
+            <i class="icon-gift"></i> {{iNav.adminHostsPackages}}
+          </a>
+          </li>
+        </ul>
+
+        <ul class="js-nav-module-list hide" data-id="webfilter">
+          <li class="js-nav-submodule" data-id="categories">
+          <a href="#admin/webfilter/Categories">
+            <i class="icon-list-alt"></i> {{iNav.adminWebfilterCategories}}
+          </a>
+          </li>
+          <li class="js-nav-submodule" data-id="entries">
+          <a href="#admin/webfilter/EntryList">
+            <i class="icon-th-list"></i> {{iNav.adminWebfilterEntries}}
+          </a>
+          </li>
+        </ul>
+
+        <ul class="js-nav-module-list hide" data-id="printers">
+          <li class="js-nav-submodule" data-id="printers">
+          <a href="#admin/printers/PrinterList">
+            <i class="icon-th-list"></i> {{iNav.adminPrintersPrinters}}
+          </a>
+          </li>
+        </ul>
+
+        <ul class="js-nav-module-list hide" data-id="logs">
+          <li class="js-nav-submodule" data-id="servicelogs">
+          <a href="#admin/logs/ServiceLogs">
+            <i class="icon-bolt"></i> {{iNav.adminLogsServiceLogs}}
+          </a>
+          </li>
+          <li class="js-nav-submodule" data-id="sessionlogs">
+          <a href="#admin/logs/SessionLogs">
+            <i class="icon-user"></i> {{iNav.adminLogsSessionLogs}}
+          </a>
+          </li>      
+        </ul>
+
+        <ul class="js-nav-module-list hide" data-id="config">
+          <li class="js-nav-submodule" data-id="main">
+          <a href="#admin/config/Main">
+            <i class="icon-cog"></i> {{iNav.adminConfig}}
+          </a>
+          </li>
+        </ul>
+
+        <ul class="js-nav-module-list hide" data-id="dashboard">
+          <li class="js-nav-submodule" data-id="main">
+          <a href="#dashboard">
+            <i class="icon-dashboard"></i> {{iNav.dashboardMain}}
+          </a>
+          </li> 
+          <li class="js-nav-submodule" data-id="pwd">
+          <a href="#session/ChangePassword">
+            <i class="icon-key"></i> {{iNav.dashboardPassword}}
+          </a>
+          </li> 
+          <li class="js-nav-submodule" data-id="remote">
+          <a href="#dashboard/Remote">
+            <i class="icon-laptop"></i> {{iNav.dashboardRemote}}
+          </a>
+          </li> 
+        </ul>
+        <ul class="js-nav-module-list hide" data-id="teacher">
+          <li class="js-nav-submodule" data-id="roomctl">
+          <a href="#teacher/RoomCtl">
+            <i class="icon-sitemap"></i> {{iNav.teacherRoomCtl}}
+          </a>
+          </li> 
+          <li class="js-nav-submodule" data-id="studentpwd">
+          <a href="#teacher/StudentPwd">
+            <i class="icon-key"></i> {{iNav.teacherStudentPwd}}
+          </a>
+          </li>
+          <li class="js-nav-submodule" data-id="usergroups">
+          <a href="#teacher/UserGroupList">
+            <i class="icon-group"></i> {{iNav.teacherUserGroups}}
+          </a>
+          </li>
+        </ul>
+
+        <ul class="js-nav-module-list hide" data-id="files">
+          <li class="js-nav-submodule" data-id="home">
+          <a href="#files/View!home">
+            <i class="icon-user"></i> {{iNav.filesViewHome}}
+          </a>
+          </li> 
+          <li class="js-nav-submodule" data-id="groups">
+          <a href="#files/View!groups">
+            <i class="icon-group"></i> {{iNav.filesViewGroups}}
+          </a>
+          </li> 
+          <li class="js-nav-submodule" data-id="progdata">
+          <a href="#files/View!progdata">
+            <i class="icon-archive"></i> {{iNav.filesViewProgdata}}
+          </a>
+          </li> 
+          <li class="js-nav-submodule hide" data-id="teacher">
+          <a href="#files/View!teacher">
+            <i class="icon-briefcase"></i> {{iNav.filesViewTeacher}}
+          </a>
+          </li> 
+          <li class="js-nav-submodule hide" data-id="admin">
+          <a href="#files/View!admin">
+            <i class="icon-cogs"></i> {{iNav.filesViewAdmin}}
+          </a>
+          </li> 
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="mainWrapper">
+  <div class="container">
+    <div class="row" id="mainOuter">
+      <div id="main">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="alert-container js-alert-container"></div>
+

@@ -1,0 +1,284 @@
+#!/usr/bin/env ruby
+begin
+  require 'thor'
+  require 'net/vnc'
+  require 'net/ssh'
+rescue LoadError
+  puts 'Some gems not found. Try running packages.sh first.'
+  exit
+end
+
+Dir.chdir File.dirname __FILE__
+STDOUT.sync = true
+
+VM_LIST = %w{sykusbuild sykussrv}
+VM_LIST_ALL = VM_LIST + %w{sykuscli}
+
+def ssh_cmd(ip, cmd, stdin_data = nil)
+  opts = {
+    global_known_hosts_file: [],
+    user_known_hosts_file: [],
+    keys: [ 'keys/insecure_deploy_key' ],
+    timeout: 2,
+  }
+  begin
+    Net::SSH.start(ip, 'root', opts) do |ssh|
+      channel = ssh.open_channel do |ch|
+        ch.exec(cmd) do |ch, success|
+          ch.on_request 'exit-status' do |_, data| 
+            code = data.read_long
+            if code != 0
+              puts "Command exit with code #{code}"
+              exit
+            end
+          end
+
+          ch.on_data { |ch, data| print data }
+          ch.on_extended_data { |ch, type, data| print data }
+          ch.send_data stdin_data if stdin_data
+          ch.eof!
+        end
+      end
+      channel.wait
+    end
+  rescue Timeout::Error
+    sleep 2
+    print '.'
+    retry
+  end
+end
+
+class SykusDev < Thor
+  include Thor::Actions
+
+  desc 'initial', 'Creates a completely fresh development environment.'
+  def initial
+    raise unless run './packages.sh'  
+    invoke :clean
+
+    raise unless run './sykus srviso'
+    invoke :reset
+    invoke :deploy_build
+
+    ssh_cmd '10.21.1.1', 'echo "sykussrv" > /etc/hostname'
+    ssh_cmd '10.21.1.100', 'echo "sykusbuild" > /etc/hostname'
+
+    ssh_cmd '10.21.1.100', '/home/sykus3/build/sykus-deploy sshkey'
+  end
+
+  desc 'ci', 'CI run. Creates a fresh environment and runs all tests.'
+  def ci
+    invoke :initial
+    ssh_cmd '10.21.1.100', '/home/sykus3/build/sykus-build all'
+    invoke :deploy_testing
+    ssh_cmd '10.21.1.1', 'cd /usr/lib/sykus3/server; bundle exec rake ci'
+    puts 'Success.'
+  end
+
+  desc 'adminuser', 'Creates an admin user on testing server.'
+  def adminuser
+    ssh_cmd '10.21.1.100', 
+      '/home/sykus3/build/sykus-deploy adminuser --domain sykus-demo.de ' +
+      '--target-host 10.21.1.1'
+  end
+
+  desc 'deploy_demo', 'Deploys current testing build to demo server.'
+  method_option :target_host, type: :string, required: true, 
+    desc: 'Set SSH target host name'
+  def deploy_demo
+    invoke :deploy_build, [], {} 
+
+    ssh_cmd '10.21.1.100', 
+      '/home/sykus3/build/sykus-build webif --target prod'
+    ssh_cmd '10.21.1.100', 
+      '/home/sykus3/build/sykus-build server --target prod'
+
+    ssh_cmd '10.21.1.100', 
+      '/home/sykus3/build/sykus-deploy deploy --domain sykus-demo.de ' +
+      '--with-insecure-deploy-key --target-host ' + options[:target_host]
+
+    ssh_cmd options[:target_host], 
+      '/usr/lib/sykus3/server/sykus-tool demo --yes-please'
+
+    ssh_cmd '10.21.1.1', 'cat > /root/demo_key', 
+      File.read('keys/insecure_deploy_key')
+    ssh_cmd '10.21.1.1', 'chmod 0600 /root/demo_key'
+    ssh_cmd '10.21.1.1', 
+      'scp -o StrictHostKeyChecking=no -i /root/demo_key ' +
+      '/var/lib/sykus3/image/* root@' + options[:target_host] + ':' +  
+      '/var/lib/sykus3/image'
+    ssh_cmd '10.21.1.1', 'rm /root/demo_key'
+  end
+
+  desc 'deploy_testing', 'Builds components and deploys to testing server.'
+  method_option :build, type: :array, default: 'server webif',
+    desc: 'Possible values: blacklists cli server sni webif'
+  method_option :target, type: :string, default: 'dev',
+    desc: 'Build target to build and deploy. Can be either "dev" or "prod".'
+  def deploy_testing
+    invoke :deploy_build, [], {} 
+
+    target = options[:target]
+    raise unless %w{prod dev}.include? target
+
+    if options[:build].include? 'blacklists'
+      ssh_cmd '10.21.1.100', 
+        '/home/sykus3/build/sykus-build blacklists'
+    end
+    if options[:build].include? 'cli'
+      ssh_cmd '10.21.1.100', 
+        '/home/sykus3/build/sykus-build cli'
+    end
+    if options[:build].include? 'webif'
+      ssh_cmd '10.21.1.100', 
+        '/home/sykus3/build/sykus-build webif --target ' + target
+    end
+    if options[:build].include? 'server'
+      ssh_cmd '10.21.1.100', 
+        '/home/sykus3/build/sykus-build server --target ' + target
+    end
+    if options[:build].include? 'sni'
+      ssh_cmd '10.21.1.100', '/home/sykus3/build/sykus-build sni'
+    end
+
+    data = "sykus-demo.de\n\nDEMOTOKEN\n" + 
+      File.read('keys/sykus-demo.de.crt').strip + "\nEOF\n" +
+      File.read('keys/sykus-demo.de.key').strip + "\nEOF\n"
+
+    ssh_cmd '10.21.1.100', 'rm -f /home/sykus3/data/sykus-demo.de.json'
+    ssh_cmd '10.21.1.100', '/home/sykus3/build/sykus-deploy add', data
+    ssh_cmd '10.21.1.100', 
+      '/home/sykus3/build/sykus-deploy deploy --domain sykus-demo.de ' + 
+      '--target-host 10.21.1.1 --target ' + target
+  end
+
+  desc 'vmenv_destroy', 'Destroys the VM environment (so you can use VBox)'
+  def vmenv_destroy
+    VM_LIST_ALL.each do |vm|
+      run "virsh destroy #{vm}"
+      run "virsh undefine #{vm}"
+    end
+
+    %w{sykus sykuslan}.each do |net|
+      run "virsh net-destroy #{net}"
+      run "virsh net-undefine #{net}"
+    end
+  end
+
+  desc 'vmenv', 'Creates and resets the VM environment for development.'
+  def vmenv
+    inside 'devenv' do 
+      Dir.mkdir 'disks' unless Dir.exists? 'disks'
+      File.unlink 'disks/srv.iso' if File.exists? 'disks/srv.iso'
+      File.symlink '../../srviso/srv.iso', 'disks/srv.iso'
+
+      %w{sykus sykuslan}.each do |net|
+        run "virsh net-destroy #{net}"
+        run "virsh net-undefine #{net}"
+        run "virsh net-define network.#{net}.xml"
+        run "virsh net-autostart #{net}"
+        run "virsh net-start #{net}"
+      end
+
+      VM_LIST_ALL.each do |vm|
+        run "virsh destroy #{vm}"
+        run "virsh undefine #{vm}"
+        File.open('tmp.xml', 'w+') do |f|
+          data = File.read "domain.#{vm}.xml"
+          data.gsub! '{{BASEDIR}}', Dir.pwd
+          f.write data
+        end
+        run "virsh define tmp.xml"
+      end
+
+      FileUtils.rm_f 'tmp.xml'
+    end
+  end
+
+  desc 'startcli', 'Creates a fresh client box and starts it.'
+  method_option :reset, default: false, type: :boolean
+  def startcli
+    run 'virsh destroy sykuscli'
+    if options[:reset]
+      inside 'devenv/disks' do
+        FileUtils.rm_f 'sykuscli.qed' if File.exists? 'sykuscli.qed'
+        raise unless run 'qemu-img create -f qed sykuscli.qed 16G'
+      end
+    end
+    run 'virsh start sykuscli'
+    sleep 0.5
+    run 'xvnc4viewer localhost:6666'
+  end
+
+  desc 'reset', 'Creates fresh VM boxes.'
+  def reset
+    invoke :vmenv
+    invoke :stop
+
+    VM_LIST.each do |name|
+      inside 'devenv/disks' do
+        FileUtils.rm_f "#{name}.qed" if File.exists? "#{name}.qed"
+        raise unless run "qemu-img create -f qed #{name}.qed 32G"
+      end
+
+      run "virsh start #{name}"
+      sleep 4
+      Net::VNC.open 'localhost:0', shared: true do |vnc|
+        [ :down, :return, :down, :down, :return ].each do |key|
+          vnc.key_press key
+        end
+      end
+
+      until `virsh domstate #{name}`.strip == 'shut off'
+        sleep 5
+        print '.'
+      end
+      puts 'Done.'
+    end
+
+    invoke :start
+  end
+
+  desc 'start', 'Boots the dev environment.'
+  def start
+    VM_LIST.each do |name|
+      run "virsh start #{name}"
+    end
+  end
+
+  desc 'stop', 'Stops the dev environment.'
+  def stop 
+    VM_LIST_ALL.each do |name|
+      run "virsh shutdown #{name}"
+      sleep 1 until `virsh domstate #{name}`.strip == 'shut off'
+    end
+  end
+
+  desc 'testing_ssh', 'SSH to testing server.'
+  def testing_ssh
+    run 'ssh -i keys/insecure_deploy_key root@10.21.1.1'
+  end
+
+  desc 'build_ssh', 'SSH to dev build server.'
+  def build_ssh
+    run 'ssh -i keys/insecure_deploy_key root@10.21.1.100'
+  end
+
+  desc 'deploy_build', 'Deploys to dev build server.'
+  def deploy_build
+    raise unless run \
+      './sykus deploy --host 10.21.1.100 --sshkey keys/insecure_deploy_key'
+  end
+
+  desc 'clean', 'Cleans up all dev boxes and generated data.'
+  def clean
+    %w{
+      devenv/disks devenv/iso
+    }.each do |e|
+      FileUtils.rm_rf Dir[e]
+    end
+  end
+end
+
+SykusDev.start
+

@@ -1,0 +1,7 @@
+name: KBruch
+category: Mathematik
+text: >-
+  KBruch ist eine Lernsoftware zur Bruchrechnung.
+default: false
+apt: [ kbruch, kde-l10n-de ]
+

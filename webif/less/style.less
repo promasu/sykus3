@@ -1,0 +1,60 @@
+// prevent layout from moving when scrollbar appears
+html { overflow-y: scroll; }
+
+* { -webkit-overflow-scrolling: touch; }
+
+html, body {
+  width: 100%;
+  height: 100%;
+
+  cursor: default;
+  .user-select(none);
+  .hyphens(auto);
+}
+
+a {
+  .transition(background-color 0.1s linear);
+}
+
+.user-selectable { 
+  .user-select(auto);
+}
+
+@page { margin: 0.75cm; }
+
+@media print {
+  body { width: 21cm; }
+}
+
+.margin-row > * { 
+  margin-bottom: @line-height-computed; 
+}
+
+.lead {
+  border-bottom: 1px solid #ddd;
+}
+
+.button-variant(@color; @bg; @border) {
+  background-color: darken(@bg, 7%) !important;
+  #gradient > .vertical(lighten(@bg, 7%), darken(@bg, 7%), 0%, 100%);
+
+  .transition(background-position 0.1s linear);
+
+  &:hover {
+    background-position: 0 -15px;
+  }
+}
+
+#loadingBox {
+  * {  font-family: sans-serif !important; }
+  p { margin-bottom: 50px; }
+}
+
+
+// TODO: remove
+#topNav .todo {
+  &, * {
+    color: #aaa;
+  }
+}
+

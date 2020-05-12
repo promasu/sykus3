@@ -1,0 +1,75 @@
+require 'json'
+
+Dir.chdir File.dirname(__FILE__)
+
+task :default => [ :rspec, :untested, :yard ]
+task :ci => [ 
+  :rspec_with_warnings, :rspec_all, :untested, :yard, :isolated_cov 
+]
+
+task :rspec, :specs do |t, args|
+  sh "rspec --color -p -b -t ~slow #{args.specs}"
+end
+
+task :rspec_with_warnings do
+  grepline = [
+    '/.bundle/',
+    'void context', 'grouped expression', 'mismatched indent'
+  ].map { |ex| "|grep -v '#{ex}'" }.join(' ')
+
+  sh "rspec -w -t ~slow 2>&1 #{grepline}"
+end
+
+task :rspec_all do
+  sh "rspec --color -p -b"
+end
+
+task :yard do
+  sh "yard doc -o ../webif/serverdoc"
+  sh "yard stats --list-undoc"
+end
+
+def test_exception?(file)
+  return true if file.include? 'lib/config/'
+  return true if file.include? 'lib/includes/'
+  return true if file.include? 'lib/common.rb'
+
+  return true if file.include? 'lib/api/includes/base.rb'
+  return true if file.include? 'lib/api/main.rb'
+  false
+end
+
+task :untested do
+  cov = JSON.parse(File.read('../webif/coverage/.resultset.json'))
+  cov = cov['RSpec']['coverage'].map { |x| x.first }
+
+  Dir['lib/**/*.rb'].sort.each do |f| 
+    next if test_exception? f
+
+    spec = f.gsub(/lib\//, 'spec/').gsub(/\.rb$/, '_spec.rb')
+    err = []
+    err << 'SPEC' unless File.exists? spec
+    err << 'COV' unless cov.include? File.absolute_path(f)
+
+    if err.count > 0
+      puts "[#{err.join(',')}]\r\t\t#{f}"
+    end
+  end
+end
+
+task :isolated_cov do
+  Dir['lib/**/*.rb'].sort.each do |f|
+    next if test_exception? f
+
+    spec = f.gsub(/lib\//, 'spec/').gsub(/\.rb$/, '_spec.rb')
+    next unless File.exists? spec
+
+    sh "rspec #{spec} > /dev/null"
+    cov = JSON.parse(File.read('../webif/coverage/.resultset.json'))
+
+    f = File.absolute_path(f)
+    lines = cov['RSpec']['coverage'][f].compact.reject { |x| x > 0 }
+    puts "UNCOVERED LINES: #{lines.count}" if lines.count > 0
+  end
+end
+

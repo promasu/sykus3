@@ -1,0 +1,7 @@
+name: OpenShot
+category: Multimedia
+text: >-
+  OpenShot ist ein Videoschnittprogramm.
+default: false
+apt: [ openshot ]
+

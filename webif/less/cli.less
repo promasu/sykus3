@@ -1,0 +1,26 @@
+body.cli {
+  &, input, a {
+    color: #fff !important;
+  }
+
+  input { 
+    background-color: fade(#fff, 10%); 
+  }
+
+  .popover { 
+    color: @text-color; 
+  }
+
+  @base-bg: desaturate(@brand-primary, 45%);
+
+  background-color: lighten(@base-bg, 20%);
+  background-image: -webkit-radial-gradient(
+  50% 10%, 70% 100%, 
+  lighten(@base-bg, 45%) 0%,
+  lighten(@base-bg, 30%) 30%, 
+  saturate(lighten(@base-bg, 10%), 20%) 60%, 
+  darken(@base-bg, 5%) 100%
+  );
+
+}
+

@@ -1,0 +1,8 @@
+name: LibreOffice Writer
+category: Büro
+text: >-
+  LibreOffice Writer ist ein Textverarbeitungsprogramm.
+default: true
+apt: [ libreoffice-writer, libreoffice-gtk, 
+  libreoffice-l10n-de, hunspell-de-de ]
+

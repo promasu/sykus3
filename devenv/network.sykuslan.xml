@@ -1,0 +1,6 @@
+<network>
+  <name>sykuslan</name>
+  <ip address='10.42.0.1' netmask='255.255.0.0'>
+  </ip>
+</network>
+

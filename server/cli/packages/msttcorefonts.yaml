@@ -1,0 +1,8 @@
+name: Microsoft Schriftarten
+category: System
+text: >-
+  Installiert einige unfreie Standard-Schriftarten von Microsoft. 
+  Beinhaltet Andale, Arial, Comic Sans, Courier, Georgia, Impact, 
+  Times New Roman, Trebuchet, Verdana und Webdings.
+default: true
+

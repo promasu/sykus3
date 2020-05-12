@@ -1,0 +1,7 @@
+name: GRASS GIS
+category: Geografie
+text: >-
+  GRASS GIS ist ein freies Geoinformationssystem.
+default: false
+apt: [ grass ]
+

@@ -1,0 +1,7 @@
+name: LibreOffice Base
+category: Büro
+text: >-
+  LibreOffice Base ist ein Datenbank-Frontend.
+default: false
+apt: [ libreoffice-base, libreoffice-gtk ]
+

@@ -1,0 +1,7 @@
+name: Inkscape
+category: Multimedia
+text: >-
+  Inkscape ist ein Vektorgrafik-Bearbeitungsprogramm.
+default: false
+apt: [ inkscape ]
+

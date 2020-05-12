@@ -1,0 +1,11 @@
+<network>
+  <name>sykuscli</name>
+  <forward mode='nat' />
+  <bridge name='virsykuscli' stp='off' delay='0' />
+  <ip address='10.41.0.1' netmask='255.255.0.0'>
+    <dhcp>
+      <host mac='00:ca:fe:ba:be:01' name='sykuscli' ip='10.41.1.1' />
+    </dhcp>
+  </ip>
+</network>
+

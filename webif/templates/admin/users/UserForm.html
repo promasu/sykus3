@@ -1,0 +1,164 @@
+<fieldset>
+  <legend>{{iUsers.formLegendCommon}}</legend>
+
+  <div class="form-group">
+    <label class="col-lg-2 col-sm-3 control-label" for="field-username">
+      {{iCommon.username}}
+    </label>
+    <div class="col-lg-3 col-sm-8">
+      <input type="text" id="field-username" class="form-control"
+      data-field="username" 
+      placeholder="{{iCommon.formOptional}}" disabled="disabled">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-2 col-sm-3 control-label" for="field-firstName">
+      {{iCommon.fullName}}
+    </label>
+    <div class="col-lg-3 col-sm-4 js-validate">
+      <input type="text" id="field-firstName" data-field="first_name"
+      class="form-control js-focus" placeholder="{{iCommon.firstName}}"> 
+    </div>
+    <div class="col-lg-3 col-sm-4 js-validate">
+      <input type="text" id="field-lastName" data-field="last_name"
+      class="form-control" placeholder="{{iCommon.lastName}}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-2 col-sm-3 control-label" for="field-birthdate">
+      {{iCommon.birthdate}}
+    </label>
+    <div class="col-lg-3 col-sm-8 js-validate">
+      <input type="text" id="field-birthdate" data-field="birthdate"
+      class="form-control" placeholder="{{iCommon.birthdate}}"> 
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>{{iUsers.formLegendPosition}}</legend>
+
+  <div class="form-group js-opacity-option">
+    <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+      <input type="radio" name="field-position" data-field="position" 
+      id="field-position-student" value="student" checked>
+    </label>
+    <div class="col-lg-6 col-sm-8 col-xs-11">
+      <label for="field-position-student">
+        <p>
+        <span class="label label-default color-student">{{iUsers.positionStudent}}</span>
+        </p>
+        <p>{{{iUsers.positionStudentText}}}</p>
+        <div class="opaque-hidden">
+          <p>{{{iUsers.positionStudentUserClass}}}</p>
+
+          <div class="js-validate">
+            <input type="text" id="field-user-class" class="form-control"
+            data-field="user_class" placeholder="{{iUsers.userClass}}">
+            <div>
+              <ul class="typeahead dropdown-menu js-dropdown-user-class"></ul> 
+            </div>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group js-opacity-option">
+    <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+      <input type="radio" name="field-position" data-field="position" 
+      id="field-position-teacher" value="teacher">
+    </label>
+    <div class="col-lg-6 col-sm-8 col-xs-11">
+      <label for="field-position-teacher">
+        <p>
+        <span class="label label-default color-teacher">{{iUsers.positionTeacher}}</span>
+        </p>
+        <p>{{{iUsers.positionTeacherText}}}</p>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group js-opacity-option">
+    <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+      <input type="radio" name="field-position" data-field="position" 
+      id="field-position-person" value="person">
+    </label>
+    <div class="col-lg-6 col-sm-8 col-xs-11">
+      <label for="field-position-person">
+        <p>
+        <span class="label label-default color-person">{{iUsers.positionPerson}}</span>
+        </p>
+        <p>{{{iUsers.positionPersonText}}}</p>
+      </label>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>{{iUsers.formLegendAdmin}}</legend>
+
+  <div class="form-group js-opacity-option">
+    <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+      <input type="radio" name="field-admin" data-field="admin" 
+      id="field-admin-none" value="none" checked>
+    </label>
+    <div class="col-lg-6 col-sm-8 col-xs-11">
+      <label for="field-admin-none">
+        <p>
+        <span class="label label-default color-admin-none">{{iUsers.adminNone}}</span>
+        </p>
+        <p>{{{iUsers.adminNoneText}}}</p>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group js-opacity-option">
+    <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+      <input type="radio" name="field-admin" data-field="admin" 
+      id="field-admin-junior" value="junior">
+    </label>
+    <div class="col-lg-6 col-sm-8 col-xs-11">
+      <label for="field-admin-junior">
+        <p>
+        <span class="label label-default color-admin-junior">{{iUsers.adminJunior}}</span>
+        </p>
+        <p>{{{iUsers.adminJuniorText}}}</p>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group js-opacity-option">
+    <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+      <input type="radio" name="field-admin" data-field="admin" 
+      id="field-admin-senior" value="senior">
+    </label>
+    <div class="col-lg-6 col-sm-8 col-xs-11">
+      <label for="field-admin-senior">
+        <p>
+        <span class="label label-default color-admin-senior">{{iUsers.adminSenior}}</span>
+        </p>
+        <p>{{{iUsers.adminSeniorText}}}</p>
+      </label>
+    </div>
+  </div>
+
+  <div class="form-group js-opacity-option">
+    <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+      <input type="radio" name="field-admin" data-field="admin" 
+      id="field-admin-super" value="super">
+    </label>
+    <div class="col-lg-6 col-sm-8 col-xs-11">
+      <label for="field-admin-super">
+        <p>
+        <span class="label label-default color-admin-super">{{iUsers.adminSuper}}</span>
+        </p>
+        <p>{{{iUsers.adminSuperText}}}</p>
+      </label>
+    </div>
+  </div>
+</fieldset>
+
+

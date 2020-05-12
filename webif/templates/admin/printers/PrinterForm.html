@@ -1,0 +1,66 @@
+<fieldset>
+  <legend>{{iPrinters.formLegendCommon}}</legend>
+
+  <div class="form-group">
+    <label class="col-lg-2 col-sm-3 control-label" for="field-name">
+      {{iPrinters.name}}
+    </label>
+    <div class="col-lg-4 col-sm-8 js-validate">
+      <input type="text" id="field-name" data-field="name"
+      class="form-control js-focus" placeholder="{{iPrinters.name}}"> 
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-2 col-sm-3 control-label" for="field-driver">
+      {{iPrinters.driver}}
+    </label>
+    <div class="col-lg-5 col-sm-8 js-validate">
+      <input type="text" id="field-driver" data-field="driver"
+      placeholder="{{iPrinters.formDriver}}" class="form-control">
+      <div>
+        <ul class="typeahead dropdown-menu js-dropdown-driver"></ul> 
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-2 col-sm-3 control-label" for="field-url">
+      {{iPrinters.url}}
+    </label>
+    <div class="col-lg-5 col-sm-8 js-validate">
+      <input type="text" id="field-url" data-field="url"
+      placeholder="{{iPrinters.url}}" class="form-control"> 
+      <br>
+      <br>
+      <div class="js-discovered hide">
+        {{iPrinters.urlDiscoveredText}}
+        <div></div>
+        <br>
+      </div>
+      <p>{{{iPrinters.urlHelpText}}}</p>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>{{iPrinters.formLegendHostGroups}}</legend>
+
+  <div class="form-group">
+    <div class="col-lg-2 col-sm-3"> </div>
+    <div class="col-lg-3 col-sm-8">
+      <input type="text" id="field-hg-chooser" data-field="hg-chooser"
+      class="form-control" placeholder="{{iPrinters.formAddGroup}}">
+      <div>
+        <ul class="typeahead dropdown-menu js-dropdown-hg-chooser"></ul> 
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-8 col-lg-offset-2 col-sm-12 js-hg-list">
+    </div>
+  </div>
+</fieldset>
+
+

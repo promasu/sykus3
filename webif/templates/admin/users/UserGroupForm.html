@@ -1,0 +1,47 @@
+<fieldset>
+  <legend>{{iUsers.formLegendGroupCommon}}</legend>
+
+  <div class="form-group">
+    <label class="col-lg-2 col-sm-3 control-label" for="field-name">
+      {{iUsers.userGroupName}}
+    </label>
+    <div class="col-lg-3 col-sm-8 js-validate">
+      <input type="text" id="field-name" data-field="name"
+      placeholder="{{iUsers.userGroupName}}" class="form-control js-focus">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-lg-2 col-sm-3 control-label" for="field-owner">
+      {{iUsers.userGroupOwner}}
+    </label>
+    <div class="col-lg-3 col-sm-8 js-validate">
+      <input type="text" id="field-owner" data-field="owner" 
+      class="form-control" placeholder="{{iUsers.formGroupUserPlaceholder}}">
+      <div>
+        <ul class="typeahead dropdown-menu js-dropdown-owner"></ul> 
+      </div>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>{{iUsers.formLegendGroupMembers}}</legend>
+
+  <div class="form-group">
+    <div class="col-lg-2 col-sm-3"> </div>
+    <div class="col-lg-3 col-sm-8">
+      <input type="text" id="field-member-chooser" data-field="member-chooser"
+      placeholder="{{iUsers.formAddGroupMember}}" class="form-control">
+      <div>
+        <ul class="typeahead dropdown-menu js-dropdown-member-chooser"></ul> 
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-8 col-lg-offset-2 col-sm-12 js-member-list">
+    </div>
+  </div>
+</fieldset>
+

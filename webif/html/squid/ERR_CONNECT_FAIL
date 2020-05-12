@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html class="fullscreenpage">
+  <head>
+    <meta charset="utf-8">
+    <title>Verbindung fehlgeschlagen</title>
+    <link href="http://10.42.1.1/app/{{VERSIONDIR}}/app.css" rel="stylesheet">
+  </head>
+  <body class="cli">
+    <div>
+      <div>Es konnte keine Verbindung hergestellt werden.</div>
+    </div>
+  </body>
+</html>
+

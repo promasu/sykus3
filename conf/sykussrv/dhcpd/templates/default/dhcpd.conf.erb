@@ -1,0 +1,39 @@
+authoritative;
+ddns-update-style none;
+
+option domain-name "local.<%= @domain %>";
+option domain-name-servers 10.42.1.1;
+option ntp-servers 10.42.1.1;
+option routers 10.42.1.1;
+
+default-lease-time 1800;
+max-lease-time 1800;
+
+option local-proxy-config code 252 = text;
+option local-proxy-config "http://wpad.local.<%= @domain %>/wpad.dat\n";
+
+next-server 10.42.1.1;
+filename "/pxelinux.0";
+option space pxelinux;
+vendor-option-space pxelinux;
+option pxelinux.configfile code 209 = text;
+option pxelinux.magic code 208 = string;
+option pxelinux.reboottime code 211 = unsigned integer 32;
+
+option pxelinux.magic f1:00:74:7e;
+option pxelinux.reboottime 30;
+
+# all unknown hosts use this config
+option pxelinux.configfile "sni.conf";
+
+# assign unknown hosts to only this range
+subnet 10.42.0.0 netmask 255.255.0.0 {
+  range 10.42.200.1 10.42.254.254;
+}
+
+# this is used as a magic word in SNI, be careful!
+option host-name "unknownhost";
+
+# all known hosts are in this config
+include "/etc/dhcp/sykus.dynamic.conf";
+

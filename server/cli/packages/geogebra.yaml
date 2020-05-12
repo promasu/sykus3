@@ -1,0 +1,7 @@
+name: GeoGebra
+category: Mathematik
+text: >-
+  GeoGebra ist eine Mathe-Lernsoftware.
+default: false
+apt: [ geogebra ]
+

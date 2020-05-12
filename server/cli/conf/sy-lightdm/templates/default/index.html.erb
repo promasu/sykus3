@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <style>
+      body { background-color: #2a6491; }
+    </style>
+    <!-- load login screen in iframe that breaks out automatically 
+    to prevent errors if no network is present -->
+    <iframe src="https://<%= @domain %>/" style="visibility: hidden"></iframe>
+    <script>
+      var iframeSrc;
+
+      // refresh login screen (if network comes up delayed)
+      setInterval(function() {
+        var iframe = document.getElementsByTagName('iframe')[0];
+
+        iframeSrc = iframeSrc || iframe.src
+
+        iframe.src = 'about:blank';
+        iframe.src = iframeSrc;
+      }, 4500);
+
+      setTimeout(function () {
+        lightdm.cancel_authentication();
+
+        show_prompt = function () {
+          var data = {
+            user: {
+              username: 'localuser'
+            }
+          };
+
+          lightdm.provide_secret(JSON.stringify(data)); 
+        };
+        authentication_complete = function () {
+          if (lightdm.is_authenticated) {
+            lightdm.login('localuser', lightdm.default_session);
+          }
+        };
+
+        lightdm.start_authentication('localuser');
+      }, 14000);
+    </script>
+  </body>
+</html>
+

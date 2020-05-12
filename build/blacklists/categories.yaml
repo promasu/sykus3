@@ -1,0 +1,397 @@
+---
+- name: shalla/adv
+  default: none
+  text: >-
+    Werbe- und Marketingseiten: Beinhaltet Seiten,
+    die Werbebanner einblenden, sowie auch Werbefirmen.
+
+- name: shalla/aggressive
+  default: all
+  text: >-
+    Aggressive Inhalte wie Rassismus, Beleidungen, Hassreden.
+
+- name: shalla/alcohol
+  default: students
+  text: >-
+    Seiten von Brauereien, Keltereien und Brennereien.
+    Ebenso werden in dieser Kategorie Seiten aufgenommen,
+    die erklären, wie man Alkohol herstellt.
+
+- name: shalla/anonvpn
+  default: all
+  text: >-
+    Seiten, die VPN Dienste anbieten (keine Firmen-VPNs).
+    Es betrifft hauptsächlich Seiten, die den Ursprung der 
+    Kommunikation verschleiern wie z.B. Tor-Knoten.
+
+- name: shalla/automobile/cars
+  default: none
+  text: >-
+    Rund um das Auto: Hersteller, Zulieferer, Reparaturen etc.
+
+- name: shalla/automobile/bikes
+  default: none
+  text: >-
+    Rund um das Motorrad: Hersteller, Zulieferer, Reparaturen etc.
+
+- name: shalla/automobile/boats
+  default: none
+  text: >-
+    Alles zur Thematik Motorboote; Bezug, Typen, Hersteller,
+    Zulieferer, Wartung und Pflege.
+
+- name: shalla/automobile/planes
+  default: none
+  text: >-
+    Rund um das Flugzeug.
+
+- name: shalla/chat
+  default: students
+  text: >-
+    Plaudern via Internet in Echtzeit.
+
+- name: shalla/costtraps
+  default: all
+  text: >-
+    Seiten mit undurchsichtiger Preisgestaltung: scheinbar kostenlose Dienste,
+    die jedoch in einem kostenpflichtigen Abonnement enden.
+
+- name: shalla/dating
+  default: all
+  text: >-
+    Kontaktbörsen und Dating-Seiten.
+
+- name: shalla/downloads
+  default: none
+  text: >-
+    Herunterladen von Software, Bilder etc. 
+    Direkt oder über P2P/Torrent Seiten.
+
+- name: shalla/drugs
+  default: all
+  text: >-
+    Seiten, die Drogen und Medikamente anbieten. 
+    Beinhaltet auch Alkohol, Zigaretten und Viagra, Cialis etc.
+
+- name: shalla/dynamic
+  default: all
+  text: >-
+    Domänen, die direkt dynamischen IP Bereichen zugeordnet sind; 
+    typischerweise die Zugänge von Endbenutzern.
+
+- name: shalla/finance/banking
+  default: none
+  text: >-
+    Alles zum Thema Banken.
+
+- name: shalla/finance/insurance
+  default: none
+  text: >-
+    Alles zur Thematik Versicherungen und Versicherer.
+
+- name: shalla/finance/moneylending
+  default: none
+  text: >-
+    Seiten, die sich speziell mit der Thematik Geldverleih und 
+    Kredite befassen, Kreditaufnahme und -abzahlung.
+
+- name: shalla/finance/other
+  default: none
+  text: >-
+    Seiten, die ganz allgemein mit Finanzen zu tun haben 
+    (Wechselkurse, Anlegertips etc.).
+
+- name: shalla/finance/realestate
+  default: none
+  text: >-
+    Seite über alle Arten von Immobilien, Kauf und Verkauf 
+    von Wohnungen und Häusern, auch Mietmarkt.
+
+- name: shalla/finance/trading
+  default: none
+  text: >-
+    Seite über die Börse und den Börsenhandel (Aktien, Optionen etc.).
+
+- name: shalla/fortunetelling
+  default: students
+  text: >-
+    Seiten über Astrologie, Horoskope, Nummerologie, Handlesen etc.; 
+    Seiten, die Dienste bzgl. Wahrsagerei und der Zukunftsvorhersage anbieten.
+
+- name: shalla/forum
+  default: students
+  text: >-
+    Forums- und Diskussionsseiten, sowie teilweise auch Blogs. 
+
+- name: shalla/gamble
+  default: all
+  text: >-
+    Glückspiel und Wett-Seiten.
+
+- name: shalla/hacking
+  default: all
+  text: >-
+    Informationen über Sicherheitsschwächen und wie man sie ausnutzt.
+    Seiten, die Programme zum Ausnutzen von Sicherheitsschwächen anbieten.
+
+- name: shalla/hobby/cooking
+  default: none
+  text: >-
+    Seiten über Nahrungsmittel und ihre Zubereitung.
+
+- name: shalla/hobby/games-misc
+  default: none
+  text: >-
+    Seiten über Beschreibungen, Neuigkeiten und allgemeinen Informationen 
+    zu Spielen ohne Geldeinsatz (keine Wetten).
+
+- name: shalla/hobby/games-online
+  default: students
+  text: >-
+    Seiten, die Online-Spiele (Flash etc.) ohne Geldeinsatz (keine Wetten) 
+    anbieten.
+
+- name: shalla/hobby/gardening
+  default: none
+  text: >-
+    Seiten über das Gärtnern, wie man Pflanzen züchtet, 
+    Ungeziefer bekämpft und alle mit dem Thema Gärtnern verwandten Themen.
+
+- name: shalla/hobby/pets
+  default: none
+  text: >-
+    Seiten über Haustiere, Haustierhaltung, Pflegetips etc.
+
+- name: shalla/homestyle
+  default: none
+  text: >-
+    Seiten über Inneneinrichtungen.
+
+- name: shalla/imagehosting
+  default: none
+  text: >-
+    Seiten, die insbesondere alle Arten von Bildern und Graphiken hosten, 
+    auch Photogallerien und ähnliches.
+
+- name: shalla/isp
+  default: none
+  text: >-
+    Seiten von Internet Service Providern; beinhaltet auch 
+    Seiten von reinen Webspaceanbietern.
+
+- name: shalla/jobsearch
+  default: none
+  text: >-
+    Arbeitsportale für Arbeitssuchende und Arbeitgeber. 
+    Beinhaltet auch Karriereberatungen.
+
+- name: shalla/military
+  default: none
+  text: >-
+    Seiten militärischer Einrichtungen bzw. jene,
+    die mit der Armee im Zusammenhang stehen.
+
+- name: shalla/models
+  default: students
+  text: >-
+    Modelagenturen, Modelle und Supermodels. Beinhaltet Fanseiten ebenso
+    wie Bilder mit Models. Keine Pornographie.
+
+- name: shalla/movies
+  default: students
+  text: >-
+    Kinoprogramme und Informationen über Filme und Darsteller. 
+    Laden von Video Clips und Filmen (solange dies legal ist).
+
+- name: shalla/music
+  default: none
+  text: >-
+    Musik zum Download, Informationen zu Musik und Musikgruppen, 
+    Musik im allgemeinen.
+
+- name: shalla/news
+  default: none
+  text: >-
+    Nachrichtenmagazine, Journale und einige Blogs.
+
+- name: shalla/podcasts
+  default: students
+  text: >-
+    Seiten mit Podcasts oder Podcast-Angeboten; beinhaltet auch Hörbücher.
+
+- name: shalla/politics
+  default: none
+  text: >-
+    Seiten politischer Parteien und politischer Organisationen; 
+    Seiten mit politischen Diskussionen.
+
+- name: shalla/porn
+  default: all
+  text: >-
+    Seiten mit erotischem und pornographischem Inhalt.
+
+- name: shalla/radiotv
+  default: none
+  text: >-
+    Domänen und URLs von Radio- und Fernsehstationen.
+
+- name: shalla/recreation/humor
+  default: students
+  text: >-
+    Alles, was zum Schmunzlen und Lachen bringt.
+
+- name: shalla/recreation/martialarts
+  default: none
+  text: >-
+    Seiten über alle Arten von Kampfsport, z.B. Kung-Fu, Taek Won Do, 
+    Karate, aber auch Kick-Boxen und ähnliches.
+
+- name: shalla/recreation/restaurants
+  default: none
+  text: >-
+    Seiten von Restaurant, Restaurantbeschreibungen und -rezensionen.
+
+- name: shalla/recreation/sports
+  default: none
+  text: >-
+    Seiten zum Thema Sport.
+
+- name: shalla/recreation/travel
+  default: none
+  text: >-
+    Reiseveranstalter, Reisebeschreibungen, Hotels, Buchungen,
+    Fluggesellschaften, Bahn und ähnliches.
+
+- name: shalla/recreation/wellness
+  default: none
+  text: >-
+    Wellness: Alles, was Körper und Seele gut tut.
+
+- name: shalla/redirector
+  default: all
+  text: >-
+    Seiten mit Proxydiensten, 
+    die eine aktive Umgehung des URL Filters erlauben.
+
+- name: shalla/religion
+  default: none
+  text: >-
+    Seiten mit religiösem Inhalt: Jegliche Art von Kirchen, Sekten, 
+    religiöse Interpretationen etc.
+
+- name: shalla/remotecontrol
+  default: all
+  text: >-
+    Seiten mit Diensten, die es ermöglichen, an entfernten Rechnern zu 
+    arbeiten (auch aber nicht nur durch Firewall durch). Normale,
+    traditionelle VPN Zugänge werden nicht betrachtet.
+
+- name: shalla/ringtones
+  default: all
+  text: >-
+    Informationen zu und Laden von Klingeltönen.
+
+- name: shalla/sex/lingerie
+  default: all
+  text: >-
+    Seiten, auf denen Reizwäsche präsentiert und angeboten wird.
+
+- name: shalla/sex/education
+  default: none
+  text: >-
+    Seiten mit Erklärungen zur Sexualität und sexueller Gesundheit.
+
+- name: shalla/shopping
+  default: none
+  text: >-
+    Seiten für Käufe via Internet und Preisvergleiche.
+
+- name: shalla/socialnet
+  default: students
+  text: >-
+    Soziale Netzwerke.
+
+- name: shalla/spyware
+  default: all
+  text: >-
+    Seiten rund um Spyware.
+
+- name: shalla/tracker
+  default: all
+  text: >-
+    Passives Ausspähen des Benutzerverhaltens. Beinhaltet tracking cookies, 
+    web bugs, Zähler etc., die in Webseiten zur Analyse der Benutzerverhaltens 
+    untergebracht sind.
+
+- name: shalla/urlshortener
+  default: none
+  text: >-
+    Domänen, die das Erzeugen von Kurz-URLs aus normalen URLs ermöglichen. 
+
+- name: shalla/violence
+  default: all
+  text: >-
+    Gewalt und Gewaltverherrlichung. Beinhaltet Darstellungen des
+    gewaltsamen Todes von Menschen, wie man anderen Schaden zufügt,
+    Brutalität und Bestialität.
+
+- name: shalla/warez
+  default: all
+  text: >-
+    Seiten, die geknackte Passworte und Lizenzen kopiergeschützter 
+    Programme anbieten sowie das Laden kopiergeschützten Daten und Programme.
+
+- name: shalla/weapons
+  default: students
+  text: >-
+    Waffen und Zubehör. Seiten, die Funktionsweise und den Umgang 
+    mit Waffen erklären sowie Hersteller.
+
+- name: shalla/webmail
+  default: none
+  text: >-
+    Seiten, die webbasierte E-Mail-Dienste anbieten.
+
+- name: shalla/webphone
+  default: all
+  text: >-
+    Seiten, die Internet Telephonie, speziell, aber nicht 
+    nur HTTP-basiert, anbieten.
+
+- name: shalla/webradio
+  default: all
+  text: >-
+    Seiten mit Internet Radio und Audio Live Streams.
+
+- name: shalla/webtv
+  default: all
+  text: >-
+    Seiten, die Fernsehen per WWW anbieten.
+
+- name: uni-toulouse/adult
+  default: all 
+  text: >-
+    Seiten mit erotischem und pornographischem Inhalt.
+
+- name: uni-toulouse/malware
+  default: all
+  text: >-
+    Seiten, die Viren und Malware verbreiten.
+
+- name: uni-toulouse/phishing
+  default: all
+  text: >-
+    Phishing-Seiten.
+
+- name: uni-toulouse/redirector
+  default: all
+  text: >-
+    Seiten mit Proxydiensten, 
+    die eine aktive Umgehung des URL Filters erlauben.
+
+- name: uni-toulouse/games
+  default: students
+  text: >-
+     Seiten, die Online-Spiele (Flash etc.) anbieten.   
+
+

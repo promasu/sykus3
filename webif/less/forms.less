@@ -1,0 +1,73 @@
+.btn, input[type="button"], button { 
+  font-weight: @headings-font-weight;
+  @media print { display: none !important; }
+}
+
+form {
+  fieldset {
+    > legend { 
+      border: 0; 
+      padding-bottom: @line-height-computed;
+      margin-bottom: 0px;
+    }
+
+    margin-bottom: floor(@line-height-computed * 1.5);
+  }
+
+  label {
+    cursor: pointer;
+
+    &:not(.control-label) {
+      font-weight: normal;
+    }
+  }
+
+  .large-textarea {
+    min-width: 80%;
+    min-height: 300px;
+  }
+
+  .dropdown-block {
+    position: static;
+    display: block;
+
+    div {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+
+  .label-multichooser {
+    text-align: left;
+    display: inline-block;
+    font-size: 90%;
+    line-height: 25px;
+
+    padding-left: 15px;
+    padding-right: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+
+    @media (min-width: @screen-sm) {
+      min-width: 300px;
+    }
+
+    .label {
+      font-size: 95%;
+      margin-right: 10px; 
+    }
+  }
+
+  .validate {
+    .help-block();
+    color: @state-danger-text;
+  }
+
+  .opaque { 
+    opacity: 0.5; 
+    .opaque-hidden { display: none; }
+  }
+
+  .controls p { max-width: 500px; }
+}
+

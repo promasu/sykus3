@@ -1,0 +1,24 @@
+<h3 class="popover-title">
+  {{iHosts.updateHostGroup}}
+</h3>
+<div class="popover-content">
+  <form class="form-horizontal js-update-form">
+    <div class="form-group">
+      <label class="col-xs-4 control-label" for="field-name">
+        {{iHosts.hostGroupNameShort}}
+      </label>
+      <div class="col-xs-8">
+        <input type="text" id="field-name" class="form-control js-name" 
+        placeholder="{{iHosts.hostGroupName}}" value="{{hostGroup.name}}">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-12">
+        <button type="submit" class="form-control btn btn-primary">
+          <i class="icon-edit"></i>
+          {{iHosts.updateHostGroup}}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

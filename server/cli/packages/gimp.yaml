@@ -1,0 +1,7 @@
+name: GIMP
+category: Multimedia
+text: >-
+  GIMP ist eine mächtige Bildbearbeitungssoftware.
+default: true
+apt: [ gimp ]
+

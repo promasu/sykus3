@@ -1,0 +1,140 @@
+upstream api {
+  server unix:/var/lib/sykus3/run/api.5000.sock; 
+  server unix:/var/lib/sykus3/run/api.5001.sock; 
+  server unix:/var/lib/sykus3/run/api.5002.sock; 
+  server unix:/var/lib/sykus3/run/api.5003.sock; 
+  }
+
+upstream webdav {
+  server unix:/var/lib/sykus3/run/webdav.5100.sock; 
+  server unix:/var/lib/sykus3/run/webdav.5101.sock; 
+  server unix:/var/lib/sykus3/run/webdav.5102.sock; 
+  server unix:/var/lib/sykus3/run/webdav.5103.sock; 
+}
+
+# wpad + redirect
+server {
+  listen 80 default_server;
+
+  location = /wpad.dat {
+    alias /etc/squid3/wpad.dat;
+  }
+
+  location / {
+    rewrite ^ https://<%= @domain %>$request_uri?;
+  }
+}
+
+# no proxy redirect
+server {
+  # listen on lan only
+  listen 10.42.1.1:82 default_server;
+
+  location / {
+    rewrite ^ https://<%= @domain %>/proxy.html?;
+  }
+}
+  
+# weblock
+server {
+  # listen on lan only
+  listen 10.42.1.1:83 default_server;
+
+  location / {
+    expires epoch;
+    rewrite ^ https://<%= @domain %>/locked.html?;
+  }
+}
+
+# main ssl
+server {
+  listen 443 ssl;
+  server_name <%= @domain %>;
+ 
+  ssl_certificate /etc/nginx/ssl/cert.pem;
+  ssl_certificate_key /etc/nginx/ssl/cert.key;
+ 
+  root /usr/lib/sykus3/webif;
+
+  # no caching
+  expires epoch;
+  add_header Cache-Control "private, no-store, must-revalidate";
+  add_header Pragma "no-cache";
+
+  # each build gets a custom subdir, enable caching
+  location /app/ {
+    add_header Cache-Control "public";
+    expires 1y;
+
+    # build process creates static gzip files with max compression
+    gzip_static on;
+  }
+
+  # radius certificates
+  location /radius/ {
+    alias /etc/freeradius/certs/public/;
+  }
+
+  # NSS user + group databse files
+  location /nssdb/ {
+    alias /var/lib/sykus3/nssdb/;
+  }
+
+  location /api/sni/ {
+    deny all;
+  }
+
+  location /api/ {
+    rewrite /api/(.*) /$1 break;
+
+    proxy_pass http://api;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-SSL on;
+    proxy_set_header X-Forwarded-Port 443;
+    proxy_set_header X-Forwarded-For $remote_addr;
+  }
+
+  # no trailing slash for maximum compatibility!
+  location /dav {
+    # max webdav upload size
+    client_max_body_size 32m;
+   
+    proxy_pass http://webdav;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-SSL on;
+    proxy_set_header X-Forwarded-Port 443;
+    proxy_set_header X-Forwarded-For $remote_addr;
+  }
+}
+
+# ssl redirect
+server { 
+  listen 443 ssl default_server;
+
+  ssl_certificate /etc/nginx/ssl/cert.pem;
+  ssl_certificate_key /etc/nginx/ssl/cert.key;
+
+  location / {
+    rewrite ^ https://<%= @domain %>$request_uri?;
+  }
+}
+
+# sni
+server {
+  # listen on lan only
+  listen 10.42.1.1:81 default_server;
+
+  root /var/lib/sykus3/image;
+
+  # since decompression and disk write might be slower than network,
+  # leave enough time to avoid timeouts
+  send_timeout 3600;
+
+  location /api/sni/ {
+    rewrite /api/(.*) /$1 break;
+    proxy_pass http://api;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-For $remote_addr;
+  }
+}
+

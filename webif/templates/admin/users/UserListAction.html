@@ -1,0 +1,20 @@
+<h3 class="popover-title">
+  {{data.first_name}} {{data.last_name}}
+</h3>
+<div class="popover-content">
+  <a href="#admin/users/UserUpdate!{{data.id}}" 
+    class="btn btn-block btn-primary">
+    <i class="icon-edit"></i>
+    {{iUsers.updateUserShort}}
+  </a>
+
+  <button class="btn btn-block btn-warning js-btn-passwordreset">
+    <i class="icon-key"></i>
+    {{iUsers.passwordReset}}
+  </button>
+
+  <button class="btn btn-block btn-danger js-btn-delete">
+    <i class="icon-remove"></i>
+    {{iUsers.deleteUserShort}}
+  </button>
+</div>

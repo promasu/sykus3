@@ -1,0 +1,13 @@
+<h3 class="popover-title">
+  {{iRoomCtl.chooseHg}}
+</h3>
+<div class="popover-content">
+  <p>{{iRoomCtl.chooseHgText}}</p>
+  <select class="form-control js-chooser">
+    <option>{{iRoomCtl.chooseHgDefault}}</option>
+    {{#hostGroups}}
+    <option data-id="{{id}}">{{name}}</option>
+    {{/hostGroups}}
+  </select>
+</div>
+

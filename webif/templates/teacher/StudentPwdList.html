@@ -1,0 +1,32 @@
+<div class="col-xs-12">
+  <div class="lead">
+    {{iStudentPwd.title}}
+  </div>
+
+  <div id="StudentPwdTable">
+    <div class="row margin-row">
+      {{>gridFilter}}
+    </div>
+
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th data-sort-field="last_name">{{iCommon.lastName}}</th>
+          <th data-sort-field="first_name">{{iCommon.firstName}}</th>
+          <th>{{iUsers.userClassShort}}</th>
+          <th data-sort-field="username">{{iCommon.username}}</th>
+          <th>{{iCommon.birthdate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="100">
+            {{iGrid.noResults}}
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

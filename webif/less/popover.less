@@ -1,0 +1,15 @@
+.popover {
+  display: block;
+  min-width: 250px;
+
+  form { margin: 0; } 
+}
+
+.popover-backdrop {
+  .modal-backdrop();
+
+  z-index: (@zindex-popover - 10);
+  opacity: 0 !important;
+}
+
+

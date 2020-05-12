@@ -1,0 +1,9 @@
+# prepend 'exec' to commands to replace "su" process with command
+# without this fix, upstart cannot stop processes correctly
+api: exec bundle exec thin start -e none -S /var/lib/sykus3/run/api.$PORT.sock -R lib/api/config.ru
+webdav: exec sudo bundle exec thin start -e none -S /var/lib/sykus3/run/webdav.$PORT.sock -R lib/webdav/config.ru
+worker-fast: exec bundle exec rake -f lib/jobs/Rakefile resque:work QUEUE=fast INTERVAL=1 TERM_CHILD=1
+worker-slow: exec bundle exec rake -f lib/jobs/Rakefile resque:work QUEUE=slow INTERVAL=2 TERM_CHILD=1
+worker-image: exec bundle exec rake -f lib/jobs/Rakefile resque:work QUEUE=image INTERVAL=5 TERM_CHILD=1
+scheduler: exec bundle exec rake -f lib/jobs/Rakefile resque:scheduler 
+

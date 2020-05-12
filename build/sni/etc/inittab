@@ -1,0 +1,3 @@
+::sysinit:/scripts/init.sh
+::askfirst:/bin/busybox sh
+

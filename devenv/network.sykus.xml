@@ -1,0 +1,13 @@
+<network>
+  <name>sykus</name>
+  <forward mode='nat' />
+  <bridge name='virsykus' stp='off' delay='0' />
+  <ip address='10.21.0.1' netmask='255.255.0.0'>
+    <dhcp>
+      <range start='10.21.21.1' end='10.21.21.254' />
+      <host mac='00:ca:fe:00:00:01' name='sykussrv' ip='10.21.1.1' />
+      <host mac='00:ca:fe:01:00:00' name='sykusbuild' ip='10.21.1.100' />
+    </dhcp>
+  </ip>
+</network>
+

@@ -1,0 +1,7 @@
+name: PiTiVi
+category: Multimedia
+text: >-
+  PiTiVi ist ein Videoschnittprogramm.
+default: false
+apt: [ pitivi ]
+

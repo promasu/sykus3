@@ -1,0 +1,108 @@
+#!/usr/bin/env ruby
+
+$:.unshift(File.dirname(__FILE__) + '/lib/')
+Dir.chdir File.dirname __FILE__
+
+require 'common'
+require 'thor'
+require 'pry'
+
+require 'jobs/common/demodata_job'
+
+require 'jobs/hosts/abort_image_job'
+require 'jobs/hosts/create_image_job'
+require 'jobs/hosts/import_packages_job'
+require 'jobs/hosts/update_dhcp_config_job'
+
+require 'jobs/users/create_nss_db_job'
+require 'jobs/users/update_group_shares_job'
+require 'jobs/users/update_radius_users_job'
+require 'jobs/users/update_radius_secret_job'
+
+require 'jobs/webfilter/import_categories_job'
+require 'jobs/webfilter/update_nonstudents_list_job'
+
+require 'jobs/printers/read_drivers_job'
+
+module Sykus
+  def self.load_all_services_and_jobs
+    (Dir['./lib/jobs/**/*.rb'] + Dir['./lib/services/**/*.rb']).each do |f| 
+      require_relative f
+    end
+  end
+
+  class SykusTool < Thor
+    include Thor::Actions
+
+    desc 'postinstall', 'Post-install hooks (run by chef).'
+    def postinstall
+      DataMapper.auto_upgrade!
+
+      Resque.enqueue Hosts::ImportPackagesJob
+      Resque.enqueue Hosts::UpdateDHCPConfigJob
+
+      Resque.enqueue Users::CreateNSSDBJob
+      Resque.enqueue Users::UpdateGroupSharesJob
+      Resque.enqueue Users::UpdateRADIUSUsersJob
+      Resque.enqueue Users::UpdateRADIUSSecretJob
+
+      Resque.enqueue Webfilter::ImportCategoriesJob
+      Resque.enqueue Webfilter::UpdateNonStudentsListJob
+
+      Resque.enqueue Printers::ReadDriversJob
+
+      # image process gets killed anyway, so clean up a bit 
+      Resque.enqueue Hosts::AbortImageJob
+    end
+
+    desc 'adminuser', 'Create an admin user account.'
+    method_option :destroy_only, type: :boolean, default: false 
+    def adminuser
+      user = Users::User.first(username: 'sykusadmin')
+      if user
+        user.sessions.destroy
+        user.destroy!
+      end
+
+      return if options[:destroy_only]
+
+      password = rand(11111..99999).to_s
+      hash = Digest::SHA256.hexdigest password
+      Users::User.create username: 'sykusadmin', 
+        full_name: Users::FullUserName.new('Admin', 'Sykus'),
+        position_group: :person, admin_group: :super,
+        birthdate: '01.01.1990', password_nt: SecureRandom.hex(16),
+        password_expired: false, password_sha256: hash
+
+      puts "User: sykusadmin"
+      puts "Password: #{password}"
+    end
+
+    desc 'demo', 'Set up demo environment.'
+    method_option :yes_please, type: :boolean, default: false 
+    def demo
+      # safe-guard against deleting all data
+      unless options[:yes_please]
+        puts 'Run with --yes-please.'
+        exit
+      end
+
+      DemoDataJob.perform
+    end
+
+    desc 'createimage', 'Create a new image now.'
+    def createimage
+      Resque.enqueue Hosts::CreateImageJob, true
+    end
+
+    desc 'irb', 'Interactive shell with environment loaded.'
+    def irb
+      ::Sykus.load_all_services_and_jobs
+      binding.pry
+    end
+  end
+
+  SykusTool.start
+end
+
+

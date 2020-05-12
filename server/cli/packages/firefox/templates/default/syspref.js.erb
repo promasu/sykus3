@@ -1,0 +1,29 @@
+// no disk cache
+pref("browser.cache.disk.enable", false);
+pref("browser.cache.disk.capacity", 0);
+
+pref("layout.spellcheckDefault", 0);
+
+// disable nasty notifications
+pref("browser.rights.3.shown", true);
+pref("browser.startup.homepage_override.mstone", "ignore");
+
+pref("network.proxy.ftp", "10.42.1.1");
+pref("network.proxy.ftp_port", 3128);
+pref("network.proxy.http", "10.42.1.1");
+pref("network.proxy.http_port", 3128);
+pref("network.proxy.share_proxy_settings", true);
+pref("network.proxy.socks", "10.42.1.1");
+pref("network.proxy.socks_port", 3128);
+pref("network.proxy.ssl", "10.42.1.1");
+pref("network.proxy.ssl_port", 3128);
+pref("network.proxy.no_proxies_on", "<%= @domain %>");
+pref("network.proxy.type", 1);
+
+// causes large database files in user profile
+pref("browser.safebrowsing.enabled", false);
+pref("browser.safebrowsing.malware.enabled", false);
+
+// printers use a4 paper (force with user_pref)
+user_pref("print.postscript.paper_size", "a4");
+

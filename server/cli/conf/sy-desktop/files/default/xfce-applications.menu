@@ -1,0 +1,128 @@
+<!DOCTYPE Menu PUBLIC "-//freedesktop//DTD Menu 1.0//EN"
+"http://www.freedesktop.org/standards/menu-spec/1.0/menu.dtd">
+
+<Menu>
+
+  <Name>Applications</Name>
+
+  <DefaultAppDirs/>
+  <DefaultDirectoryDirs/>
+  <DefaultMergeDirs/>
+
+  <Menu>
+    <Name>Accessories</Name>
+    <Directory>Utility.directory</Directory>
+    <Include>
+      <And>
+        <Category>Utility</Category>
+        <Not><Category>Accessibility</Category></Not>
+        <Not><Category>System</Category></Not>
+      </And>
+    </Include>
+  </Menu>
+
+  <Menu>
+    <Name>Development</Name>
+    <Directory>Development.directory</Directory>
+    <Include>
+      <And>
+        <Category>Development</Category>
+      </And>
+      <Filename>emacs.desktop</Filename>
+    </Include>
+  </Menu>
+
+  <Menu>
+    <Name>Education</Name>
+    <Directory>Education.directory</Directory>
+    <Include>
+      <And>
+        <Category>Education</Category>
+        <Not><Category>Science</Category></Not>
+      </And>
+    </Include>
+  </Menu>
+
+  <Menu>
+    <Name>Science</Name>
+    <Directory>GnomeScience.directory</Directory>
+    <Include>
+      <And>
+        <Category>Education</Category>
+        <Category>Science</Category>
+      </And>
+    </Include>
+  </Menu>
+
+  <Menu>
+    <Name>Graphics</Name>
+    <Directory>Graphics.directory</Directory>
+    <Include>
+      <And>
+        <Category>Graphics</Category>
+      </And>
+    </Include>
+    <Exclude>
+      <Or>
+        <Filename>display.im6.desktop</Filename>
+      </Or>
+    </Exclude>
+
+  </Menu>
+
+  <Menu>
+    <Name>Internet</Name>
+    <Directory>Network.directory</Directory>
+    <Include>
+      <And>
+        <Category>Network</Category>
+        <Not>
+          <Category>X-GNOME-WebApplication</Category>
+        </Not>
+      </And>
+    </Include>
+
+    <Exclude>
+      <Or>
+        <Filename>exo-mail-reader.desktop</Filename>
+        <Filename>x11vnc.desktop</Filename>
+        <Filename>exo-web-browser.desktop</Filename>
+      </Or>
+    </Exclude>
+  </Menu> 
+
+  <Menu>
+    <Name>Multimedia</Name>
+    <Directory>AudioVideo.directory</Directory>
+    <Include>
+      <And>
+        <Category>AudioVideo</Category>
+      </And>
+    </Include>
+  </Menu>  
+
+  <Menu>
+    <Name>Office</Name>
+    <Directory>Office.directory</Directory>
+    <Include>
+      <And>
+        <Category>Office</Category>
+      </And>
+    </Include>
+  </Menu> 
+
+  <Include>
+    <Filename>chromium-browser.desktop</Filename>
+    <Filename>xfce4-session-logout.desktop</Filename>
+  </Include>
+
+  <Layout>
+    <Filename>chromium-browser.desktop</Filename>
+    <Separator/>
+    <Merge type="all"/>
+    <Separator/>
+    <Filename>xfce4-session-logout.desktop</Filename>
+  </Layout>
+
+</Menu> 
+

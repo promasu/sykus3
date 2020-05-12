@@ -1,0 +1,7 @@
+name: Pysycache
+category: Lernsoftware
+text: >-
+  Pysycache ist eine Lernsoftware für Grundschüler.
+default: false
+apt: [ pysycache ]
+

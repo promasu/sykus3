@@ -1,0 +1,58 @@
+source 'https://rubygems.org'
+
+# common
+gem 'json'
+gem 'activesupport', require: false
+gem 'i18n'
+gem 'sys-filesystem'
+
+# tools
+group :tools do
+  gem 'rake'
+  gem 'yard'
+  gem 'pry'
+  gem 'thor'
+  gem 'foreman'
+end
+
+# database
+gem 'redis'
+gem 'hiredis'
+gem 'data_mapper'
+gem 'dm-mysql-adapter'
+
+# server / daemon
+gem 'thin', require: false
+gem 'sinatra', require: 'sinatra/base'
+gem 'dav4rack' 
+
+# resque
+gem 'resque'
+gem 'resque-lock', require: 'resque/plugins/lock'
+gem 'resque-workers-lock', require: 'resque/plugins/workers/lock'
+gem 'resque-queue-lock', require: 'resque/plugins/queue/lock'
+gem 'resque-scheduler', require: 'resque_scheduler'
+
+# image creation
+gem 'net-ssh'
+gem 'net-sftp'
+
+# development + testing
+group :test do
+  gem 'rspec'
+  gem 'dm-sqlite-adapter'
+  gem 'fakefs', require: 'fakefs/spec_helpers'
+
+  # REVIEW: bug in sqlite adapter after v0.9 until at least v1.1.1
+  gem 'database_cleaner', '~>0.9'
+
+  gem 'nokogiri'
+  gem 'timecop'
+  gem 'miniskirt'
+  gem 'rspec'
+  gem 'dm-rspec'
+  gem 'rack-test'
+  gem 'simplecov'
+  gem 'ruby-prof'
+end
+

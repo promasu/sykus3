@@ -1,0 +1,95 @@
+<div class="col-xs-12">
+  <div class="lead">
+    {{iWebfilter.createEntry}}
+  </div>
+  <form class="form-horizontal">
+    <fieldset>
+      <legend>{{iWebfilter.formLegendCommon}}</legend>
+
+      <div class="form-group">
+        <label class="col-lg-2 col-sm-3 control-label" for="field-domain">
+          {{iWebfilter.entryDomain}}
+        </label>
+        <div class="col-lg-4 col-sm-8 js-validate">
+          <input type="text" id="field-username" data-field="domain"
+          class="form-control js-focus"
+          placeholder="{{iWebfilter.entryDomain}}">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-lg-2 col-sm-3 control-label" for="field-comment">
+          {{iWebfilter.entryComment}}
+        </label>
+        <div class="col-lg-5 col-sm-8 js-validate">
+          <input type="text" id="field-comment" data-field="comment" 
+          class="form-control" placeholder="{{iWebfilter.entryComment}}">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>{{iWebfilter.formLegendType}}</legend>
+
+      <div class="form-group js-opacity-option">
+        <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+          <input type="radio" name="field-type" data-field="type" 
+          id="field-type-white-all" value="white_all" checked>
+        </label>
+        <div class="col-lg-6 col-sm-8 col-xs-11">
+          <label for="field-type-white-all">
+            <span class="label label-success">
+              {{iWebfilter.entryTypeWhiteAll}}
+            </span>
+            <br>
+            <p>{{iWebfilter.entryTypeWhiteAllTitle}}</p>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group js-opacity-option">
+        <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+          <input type="radio" name="field-type" data-field="type" 
+          id="field-type-nonstudents-only" value="nonstudents_only">
+        </label>
+        <div class="col-lg-6 col-sm-8 col-xs-11">
+          <label for="field-type-nonstudents-only">
+            <span class="label label-info">
+              {{iWebfilter.entryTypeNonStudentsOnly}}
+            </span>
+            <br>
+            <p>{{iWebfilter.entryTypeNonStudentsOnlyTitle}}</p>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group js-opacity-option">
+        <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+          <input type="radio" name="field-type" data-field="type" 
+          id="field-type-black-all" value="black_all">
+        </label>
+        <div class="col-lg-6 col-sm-8 col-xs-11">
+          <label for="field-type-black-all">
+            <span class="label label-danger">
+              {{iWebfilter.entryTypeBlackAll}}
+            </span>
+            <br>
+            <p>{{iWebfilter.entryTypeBlackAllTitle}}</p>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <div class="form-group">
+      <div class="col-lg-2 col-sm-3 col-xs-1"></div>
+      <div class="col-sm-9 col-xs-11">
+        <button type="submit" class="btn btn-primary js-btn-submit">
+          {{iWebfilter.entryCreateBtn}}
+        </button>
+        <a href="#admin/webfilter/EntryList" class="btn btn-default">
+          {{iCommon.cancelBtn}}
+        </a>
+      </div>
+    </div>
+  </form>
+</div>
+

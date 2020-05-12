@@ -1,0 +1,4 @@
+#!/bin/bash
+
+ruby /usr/lib/sykus3/daemon/login.rb
+

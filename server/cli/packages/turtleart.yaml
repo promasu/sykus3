@@ -1,0 +1,7 @@
+name: TurtleArt
+category: Programmieren
+text: >-
+  TurtleArt ist eine Lern-Programmierumgebung mit grafischer Ausgabe.
+default: false
+apt: [ turtleart ]
+

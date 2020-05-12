@@ -1,0 +1,4 @@
+make_resolv_conf() {
+  echo "preventing modification of /etc/resolv.conf"
+}
+

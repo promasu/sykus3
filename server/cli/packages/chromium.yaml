@@ -1,0 +1,7 @@
+name: Chromium
+category: Internet
+text: >-
+  Chromium ist ein weit verbreiteter Webbrowser. Die AdBlock Erweiterung
+  wird automatisch installiert.
+default: true
+

@@ -1,0 +1,125 @@
+<div class="col-xs-12">
+  <div class="lead">
+    {{iUsers.userImportTitle}}
+  </div>
+  <form class="form-horizontal">
+    <fieldset class="js-input-stage">
+      <legend>{{iUsers.importLegendGroup}}</legend>
+
+      <div class="form-group js-opacity-option">
+        <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+          <input type="radio" name="field-position" data-field="position" 
+          id="field-position-student" value="student" checked>
+        </label>
+        <div class="col-lg-6 col-sm-8 col-xs-11">
+          <label for="field-position-student">
+            <span class="label label-default color-student">{{iUsers.positionStudent}}</span>
+            <br>
+            <p>{{{iUsers.positionStudentText}}}</p>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group js-opacity-option">
+        <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+          <input type="radio" name="field-position" data-field="position" 
+          id="field-position-teacher" value="teacher">
+        </label>
+        <div class="col-lg-6 col-sm-8 col-xs-11">
+          <label for="field-position-teacher">
+            <span class="label label-default color-teacher">{{iUsers.positionTeacher}}</span>
+            <br>
+            <p>{{{iUsers.positionTeacherText}}}</p>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="js-input-stage">
+      <legend>{{iUsers.importLegendDelete}}</legend>
+
+      <div class="form-group js-opacity-option">
+        <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+          <input type="radio" name="field-delete" data-field="delete" 
+          id="field-delete-true" value="true" checked>
+        </label>
+        <div class="col-lg-6 col-sm-8 col-xs-11">
+          <label for="field-delete-true">
+            <span class="label label-default color-no">{{iUsers.importDeleteTrue}}</span>
+            <br>
+            <p>{{{iUsers.importDeleteTrueText}}}</p>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group js-opacity-option">
+        <label class="col-lg-2 col-sm-3 col-xs-1 control-label">
+          <input type="radio" name="field-delete" data-field="delete" 
+          id="field-delete-false" value="false">
+        </label>
+        <div class="col-lg-6 col-sm-8 col-xs-11">
+          <label for="field-delete-false">
+            <span class="label label-default color-yes">{{iUsers.importDeleteFalse}}</span>
+            <br>
+            <p>{{{iUsers.importDeleteFalseText}}}</p>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="js-input-stage">
+      <legend>{{iUsers.importLegendData}}</legend>
+
+      <div class="form-group">
+        <div class="col-lg-2 col-sm-3 col-xs-1"></div>
+        <div class="col-lg-6 col-sm-8 col-xs-11">
+          <p class="js-data-help"></p>
+          <textarea data-field="data" 
+            class="form-control large-textarea"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-lg-2 col-sm-3 col-xs-1"></div>
+        <div class="col-sm-9 col-xs-11">
+          <button type="submit" class="btn btn-primary js-btn-check hide">
+            {{iUsers.importBtnCheck}}
+          </button>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="js-results hide">
+      <legend>{{iUsers.importLegendResult}}</legend>
+      <div class="form-group">
+        <div class="col-xs-12">
+          <table class="table table-striped table-bordered">
+            <thead>
+              <tr>
+                <th>{{iUsers.importActionTitle}}</th>
+                <th>{{iCommon.lastName}}</th>
+                <th>{{iCommon.firstName}}</th>
+                <th class="js-user-class-title">{{iUsers.userClassShort}}</th>
+                <th>{{iCommon.birthdate}}</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-xs-12">
+          <button type="form" class="btn btn-danger js-btn-confirm">
+            {{iUsers.importBtnConfirm}}
+          </button>
+          <button type="button" class="btn btn-default js-btn-cancel">
+            {{iCommon.backBtn}}
+          </button> 
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+

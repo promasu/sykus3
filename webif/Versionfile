@@ -1,0 +1,10 @@
+# REVIEW: check for current versions
+# Watch out for exact version string match with project.
+# Some projects have a "v" prefix.
+
+BOOTSTRAP_VERSION="v3.0.3"
+MUSTACHE_VERSION="0.7.3"
+FONT_AWESOME_VERSION="v3.2.1"
+DOJO_VERSION="1.9.2"
+DOJO_UTIL_VERSION="$DOJO_VERSION"
+

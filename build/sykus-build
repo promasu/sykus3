@@ -1,0 +1,113 @@
+#!/usr/bin/env ruby
+Dir.chdir File.dirname __FILE__
+require 'bundler'
+require 'yaml'
+require 'fileutils'
+require_relative './cli/build.rb'
+Bundler.require
+
+def method_target
+  method_option :target, type: :string, default: 'both', 
+    desc: 'Build target. Can be one of: both, dev, prod'
+end
+
+def target(name)
+  case options[:target].strip.downcase
+  when 'both', name
+    return true
+  end
+  false
+end
+
+class SykusBuild < Thor
+  include Thor::Actions
+
+  desc 'all', 'Build all items.'
+  method_target
+  def all
+    invoke :sni, [], {}
+    invoke :cli, [], {}
+    invoke :blacklists, [], {}
+    invoke :webif
+    invoke :server
+  end
+
+  desc 'sni', 'Create SNI kernel and ramdisk.'
+  def sni
+    inside 'sni' do
+      raise unless run './build.sh'
+      inside 'dist' do
+        raise unless run 'tar -czf ../../../dist/sni.tgz vmlinuz initrd.img'
+      end
+    end
+  end
+
+  desc 'blacklists', 'Downloads and packs webfilter blacklists.'
+  def blacklists
+    inside 'blacklists' do
+      raise unless run './build.sh'
+      inside 'dist' do
+        # check category file syntax
+        raise unless YAML.load_file('categories.yaml').is_a? Array
+
+        raise unless run 'tar -czf ../../../dist/blacklists.tgz *'
+      end
+    end
+  end
+
+  desc 'cli', 'Create Client base image.'
+  def cli
+    inside 'cli' do
+      CliBuild.run
+      FileUtils.mv 'volumes/sykuscli.qed', '../../dist/sykuscli.qed'
+    end
+  end
+
+  desc 'webif', 'Compile Web Interface.'
+  method_target
+  def webif     
+    raise unless run 'webif/download_libs.sh'
+
+    if target 'dev'
+      raise unless run 'webif/build.sh dev'
+      inside '../webif/dist' do
+        raise unless run \
+          'tar -czf ../../dist/webif_dev.tgz *'
+      end
+    end
+
+    if target 'prod'
+      raise unless run 'webif/build.sh prod'
+      inside '../webif/dist' do
+        raise unless run \
+          'tar -czf ../../dist/webif_prod.tgz *'
+      end
+    end
+  end
+
+  desc 'server', 'Pack server files.'
+  method_target
+  def server
+    list_prod = %w{cli lib Gemfile Gemfile.lock Procfile sykus-tool}
+    list_dev = list_prod + %w{spec Rakefile}
+    list_prod << 'ENV_PRODUCTION'
+
+    inside '../server' do
+      FileUtils.touch 'ENV_PRODUCTION'
+
+      if target 'dev'
+        raise unless run \
+          'tar -czf ../dist/server_dev.tgz ' + list_dev.join(' ')
+      end
+
+      if target 'prod'
+        raise unless run \
+          'tar -czf ../dist/server_prod.tgz ' + list_prod.join(' ')
+      end
+    end
+  end
+
+end
+
+SykusBuild.start
+

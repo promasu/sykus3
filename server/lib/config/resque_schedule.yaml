@@ -1,0 +1,31 @@
+'Sykus::Hosts::CreateImageJob':
+  cron: '0 3 1 * *'
+  args: true
+
+'Sykus::Logs::DeleteOldLogsJob':
+  cron: '0 1 * * *'
+
+'Sykus::Printers::ClearAllJobsJob':
+  cron: '0 3 * * *'
+
+'Sykus::Printers::DiscoverPrintersJob':
+  every: '1m'
+
+'Sykus::Users::CleanSessionsJob':
+  every: '5s'
+
+'Sykus::Hosts::WakeHostsJob':
+  every: '30s'
+
+'Sykus::GetDiskSpaceJob':
+  every: '30s'
+
+'Sykus::Users::UpdateQuotasJob':
+  every: '15m'
+
+'Sykus::Users::GetQuotaUsageJob':
+  every: '5m'
+
+'Sykus::Hosts::PingHostsJob':
+  every: '10s'
+

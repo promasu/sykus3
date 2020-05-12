@@ -1,0 +1,7 @@
+name: Scratch
+category: Programmieren
+text: >-
+  Scratch ist eine Lern-Programmierumgebung mit grafischer Ausgabe.
+default: false
+apt: [ scratch ]
+

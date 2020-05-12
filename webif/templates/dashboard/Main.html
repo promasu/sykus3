@@ -1,0 +1,49 @@
+<div class="col-xs-12 dashboard" id="dashboardMain">
+  <h3>
+    {{>tplTitle}}
+  </h3>
+
+  <div class="js-demo hide">
+    <div class="lead">
+      Nachrichten
+    </div>
+    <p>Sie haben <a href="#"><strong>2 ungelesene Nachrichten</strong></a>.</p>
+  </div>
+
+  <div class="lead">
+    {{iDashboard.quotaTitle}}
+  </div>
+  <p>{{>tplQuotaText}}</p>
+  <div class="progress">
+    <div class="progress-bar {{quotaClass}}"
+      style="width: {{quotaPercent}}%;"></div>
+  </div>
+  {{#quotaWarning}}
+  <p>{{iDashboard.quotaWarning}}</p>
+  {{/quotaWarning}}
+
+
+  <div class="js-roomctl hide">
+    <div class="lead">
+      {{iDashboard.roomctlTitle}}
+    </div>
+    <p>{{{iDashboard.roomctlText}}}</p>
+  </div>
+
+  <div class="js-demo hide">
+    <div class="lead">
+      Termine
+    </div>
+    <p>
+    Sie haben <a href="#">4 eigene</a> und <a href="#">12 Gruppentermine</a>
+    in der nächsten Woche.
+    </p>
+  </div>
+
+  <div class="lead">
+    {{iDashboard.remoteTitle}}
+  </div>
+  <p>{{{iDashboard.remoteText}}}</p>
+
+</div>
+

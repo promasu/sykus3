@@ -1,0 +1,27 @@
+<tr>
+  <td class="file-icon">
+    {{#dir}} <i class="icon-folder-close"></i> {{/dir}}
+    {{^dir}} <i class="icon-file-alt"></i> {{/dir}}
+  </td>
+
+  <td class="file-name">
+    {{#dir}}
+    <a href="#files/View!{{full_path}}">{{name}}</a>
+    {{/dir}}
+
+    {{^dir}}
+    <a href="/api/files/{{full_path}}">{{name}}</a>
+    {{/dir}}
+  </td>
+
+  <td class="file-size">
+    {{^dir}}
+    {{size}}
+    {{/dir}}
+  </td>
+
+  <td class="file-datediff">
+    {{dateDiff}}
+  </td>
+</tr>
+

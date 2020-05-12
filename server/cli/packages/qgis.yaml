@@ -1,0 +1,7 @@
+name: Quantum GIS
+category: Geografie
+text: >-
+  Quantum GIS ist ein freies Geoinformationssystem.
+default: false
+apt: [ qgis ]
+

@@ -1,0 +1,7 @@
+name: Audacity
+category: Multimedia
+text: >-
+  Audacity ist ein freies Audiobearbeitungsprogramm.
+default: false
+apt: [ audacity ]
+

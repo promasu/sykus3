@@ -1,0 +1,3 @@
+SHELL=/bin/bash
+PATH=/bin:/sbin:/usr/bin:/usr/sbin
+*/2 * * * * root /etc/net_issue.sh &>/dev/null

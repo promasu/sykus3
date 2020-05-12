@@ -1,0 +1,197 @@
+#!/usr/bin/env ruby
+Dir.chdir File.dirname __FILE__
+STDOUT.sync = true
+
+require 'bundler'
+Bundler.require
+
+SECURE_SSH_KEY = '../data/secure_deploy_key'
+INSECURE_SSH_KEY = '../keys/insecure_deploy_key'
+
+def read_cert(msg, type_string)
+  puts "Please enter #{msg} data (end with EOF):"
+  str = STDIN.gets
+  unless str.strip == "-----BEGIN #{type_string}-----"
+    puts 'ERROR: Invalid header line'
+    exit
+  end
+
+  loop do
+    str << STDIN.gets
+    if str.strip.split("\n").last == "EOF"
+      return str.strip.split("\n")[0..-2].join("\n")
+    end
+  end
+end
+
+def read_config(options)
+  config_file = File.expand_path "../data/#{options[:domain]}.json"
+  unless File.exists? config_file
+    puts 'Domain not found.'
+    exit
+  end
+
+  JSON.parse File.read(config_file), symbolize_names: true
+end
+
+def ssh_opts(options)
+  config = read_config(options)
+  host = options[:target_host] || config[:domain]
+  raise if host.nil?
+
+  data = {
+    compression: false,
+    port: (config[:port] || 22).to_i,
+    host_name: host,
+    global_known_hosts_file: [],
+    user_known_hosts_file: [],
+    keys: [ SECURE_SSH_KEY, INSECURE_SSH_KEY ] 
+  }
+
+  data[:keys].each do |key|
+    File.chmod 0600, key if File.exists? key
+  end
+
+  data
+end
+
+class SykusDeploy < Thor
+  include Thor::Actions
+
+  desc 'sshkey', 'Generate a new master SSH key.'
+  def sshkey
+    if File.exists? SECURE_SSH_KEY
+      puts 'Key already exists.'
+      puts 'Delete manually if you REALLY want to generate a new key.'
+      return
+    end
+
+    run "ssh-keygen -t rsa -f #{SECURE_SSH_KEY} -P ''"
+  end
+
+  desc 'add', 'Adds a Sykus server to the local data repo.'
+  def add
+    data = {}
+    domain = ask('Enter domain name:').downcase
+
+    file = "../data/#{domain}.json"
+
+    if File.exists? file
+      puts 'Domain already exists in data repo.'
+      puts 'If you want to delete/overwrite the existing'
+      puts 'domain, please delete/edit the file manually.'
+      exit
+    end
+
+    data[:port] = ask('Enter SSH port (default 22):')
+    data[:port] = 22 if data[:port].strip.empty?
+
+    data[:dyndns_key] = ask('Enter domain DynDNS token:')
+    data[:ssl_cert] = read_cert('SSL Certificate', 'CERTIFICATE')
+    data[:ssl_key] = read_cert('SSL Private Key', 'RSA PRIVATE KEY')
+
+    File.open(file, 'w+') do |f|
+      f.write JSON.pretty_generate({ domain: domain }.merge(data))
+    end
+    puts 'Entity created.'
+  end
+
+  desc 'adminuser', 'Create an admin user on a Sykus server.'
+  method_option :domain, type: :string, required: true, 
+    desc: 'Sykus server domain'
+  method_option :target_host, type: :string, 
+    desc: 'Overwrite SSH target host name'
+  def adminuser
+    Net::SSH.start('x', 'root', ssh_opts(options)) do |ssh|
+      puts ssh.exec! '/usr/lib/sykus3/server/sykus-tool adminuser'
+    end
+  end
+
+  desc 'ssh', 'Starts a SSH shell.'
+  method_option :domain, type: :string, required: true, 
+    desc: 'Sykus server domain'
+  method_option :target_host, type: :string, 
+    desc: 'Overwrite SSH target host name'
+  def ssh
+    opts = ssh_opts(options)
+    run "ssh -i #{opts[:keys].join(' -i ')} -o StrictHostKeyChecking=no " +
+      "-p #{opts[:port]} root@#{opts[:host_name]}"
+  end
+
+  desc 'deploy', 'Deploys to a Sykus server.'
+  method_option :domain, type: :string, required: true, 
+    desc: 'Sykus server domain'
+  method_option :target_host, type: :string, 
+    desc: 'Overwrite SSH target host name'
+  method_option :target, type: :string, default: 'prod',
+    desc: 'Target build to install. Can be either "dev" or "prod".'
+  method_option :with_insecure_deploy_key, default: false, type: :boolean,
+    desc: 'Add insecure deploy key to server even if in prod environment.'
+  def deploy
+    target = options[:target]
+    raise unless %w{dev prod}.include? target
+
+    unless File.exists? SECURE_SSH_KEY
+      puts 'Cannot find secure SSH key.'
+      return
+    end
+
+    data = read_config(options)
+
+    ssh_pubkey = File.read(SECURE_SSH_KEY + '.pub')
+    if target == 'dev' || options[:with_insecure_deploy_key]
+      ssh_pubkey << File.read(INSECURE_SSH_KEY + '.pub')
+    end
+    data.merge!({ ssh_pubkey: ssh_pubkey })
+
+    file_list = %w{blacklists.tgz sykuscli.qed sni.tgz}
+    file_list += 
+      case target
+      when 'prod'
+        %w{server_prod.tgz webif_prod.tgz}
+      when 'dev'
+        %w{server_dev.tgz webif_dev.tgz}
+      end
+
+    remote_distdir = '/usr/lib/sykus3/dist/'
+
+    Net::SSH.start('x', 'root', ssh_opts(options)) do |ssh|
+      ssh.exec! "mkdir -p #{remote_distdir}"
+      file_list.each do |file|
+        here_file = File.expand_path "../dist/#{file}"
+        there_file = remote_distdir + file
+
+        here_mtime = File.mtime(here_file).to_i
+        there_mtime = ssh.exec!("cat #{there_file}.version 2>/dev/null").to_i
+
+        if here_mtime > there_mtime
+          print "Uploading #{here_file} to #{there_file}..."
+          ssh.sftp.upload!(here_file, there_file)
+          ssh.exec! "echo #{here_mtime} > #{there_file}.version"
+          puts "Done"
+        end
+      end
+
+      ssh.exec! 'rm -rf /tmp/sykus_conf'
+      ssh.exec! 'mkdir -p /tmp/sykus_conf'
+      ssh.sftp.upload! File.expand_path('../conf'), '/tmp/sykus_conf'
+
+      ssh.exec! 'mkdir -p /tmp/sykus_conf/data_bag/server'
+      f = Tempfile.new('server.json')
+      f.write({ id: 'server', target: target }.merge(data).to_json)
+      f.close
+      ssh.sftp.upload! f.path, '/tmp/sykus_conf/data_bag/server/server.json'
+      f.unlink
+
+      ssh.exec! 'which chef-solo || gem install chef'
+
+      ssh.exec! \
+        ('cd /tmp/sykus_conf; chef-solo -c sykussrv.rb -j main.json') \
+        { |ch, type, data| print data }
+      ssh.exec! 'rm -rf /tmp/sykus_conf'
+    end
+  end
+end
+
+SykusDeploy.start
+

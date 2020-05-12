@@ -1,0 +1,8 @@
+name: VirtualBox
+category: System
+text: >-
+  VirtualBox ist eine Virtualisierungssoftware, die eine Vielzahl
+  an Gastsystemen unterstützt.
+default: false
+apt: [ virtualbox ]
+

@@ -1,0 +1,40 @@
+.table {
+  &.table-hover tbody tr {
+    cursor: pointer;
+  }
+
+  @media (max-width: @screen-md-max) {
+    .table-condensed();
+
+    // hide invisible caret to save space
+    th i:not(.visible) {
+      display: none;
+    }
+  }
+
+  // no word wrap in titles on large screens
+  @media (min-width: @screen-xs) {
+    th, td.nowrap {
+      white-space: nowrap;
+    }
+  }
+
+  td, td * { .user-select(auto); }
+
+  // sorting arrows
+  th {
+    cursor: default;
+
+    &[data-sort-field] {
+      cursor: pointer;
+
+      i {
+        visibility: hidden;
+        &.visible { visibility: visible; }
+
+        padding-left: 5px;
+      }
+    }
+  }
+}
+

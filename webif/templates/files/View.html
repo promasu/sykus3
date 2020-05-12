@@ -1,0 +1,19 @@
+<div class="col-xs-12" id="FileViewMain">
+  <div class="lead">
+    {{#paths}}
+    <a href="#files/View!{{path}}">{{name}}</a> / 
+    {{/paths}}
+  </div>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th colspan="2">{{iView.titleName}}</th>
+        <th>{{iView.titleSize}}</th>
+        <th>{{iView.titleDateDiff}}</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+

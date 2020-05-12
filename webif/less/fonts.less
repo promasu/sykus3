@@ -1,0 +1,17 @@
+.font-face(@family, @weight) {
+  @font-face {
+    font-family: @family;
+    font-style: normal;
+    font-weight: @weight;
+
+    // no local source, it messes things up in rare cases
+    src: url('font/@{family}@{weight}.woff') format('woff');
+  }
+}
+
+@openSansFamily: 'OpenSans';
+.font-face(@openSansFamily, 300);
+.font-face(@openSansFamily, 400);
+.font-face(@openSansFamily, 600);
+.font-face(@openSansFamily, 700);
+

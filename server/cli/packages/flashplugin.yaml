@@ -1,0 +1,7 @@
+name: Adobe Flash Plugin
+category: Internet
+text: >-
+  Adobe Flash wird von vielen Webseiten zum Anzeigen aktiver Inhalte benutzt.
+default: true
+apt: [ flashplugin-installer ]
+

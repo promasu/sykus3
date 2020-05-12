@@ -1,0 +1,59 @@
+#!/usr/bin/env ruby
+begin
+  require 'thor'
+  require 'net/ssh'
+  require 'net/sftp'
+rescue LoadError
+  puts 'Could not find some gems. Try running packages.sh first.'
+  exit
+end
+
+Dir.chdir File.dirname __FILE__
+STDOUT.sync = true
+
+class Sykus < Thor
+  include Thor::Actions
+
+  desc 'srviso', 'Build the server install ISO image.'
+  def srviso
+    raise unless run './srviso/build.sh'
+  end
+
+  desc 'deploy', 'Deploys to a build server.'
+  method_option :sshkey, type: :string, required: true
+  method_option :host, type: :string, required: true
+  def deploy
+    dir_list = %w{build conf keys server webif}
+
+    opts = {
+      compression: false,
+      global_known_hosts_file: [],
+      user_known_hosts_file: [],
+      keys: [ options[:sshkey] ],
+      timeout: 2,
+    }
+    begin
+      Net::SSH.start(options[:host], 'root', opts) do |ssh|
+        ssh.exec! 'mkdir -p /home/sykus3'
+        ssh.exec! "rm -rf /home/sykus3/{#{dir_list.join(',')}}"
+        ssh.exec! "mkdir -p /home/sykus3/{#{dir_list.join(',')}}"
+        dir_list.each do |dir|
+          ssh.sftp.upload! dir, "/home/sykus3/#{dir}"
+        end
+
+        ssh.exec! 'which chef-solo || gem install chef'
+
+        ssh.exec! \
+          ('cd /home/sykus3/conf; chef-solo -c buildsrv.rb -j main.json') \
+          { |ch, type, data| print data }
+      end
+    rescue Timeout::Error
+      sleep 2
+      print '.'
+      retry
+    end
+  end
+end
+
+Sykus.start
+

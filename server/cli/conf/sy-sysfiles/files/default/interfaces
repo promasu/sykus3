@@ -1,0 +1,32 @@
+auto lo
+iface lo inet loopback
+
+iface bond0 inet dhcp
+  bond-slaves none
+  bond-mode 1
+  bond-miimon 100
+
+iface eth0 inet manual
+  bond-master bond0
+  bond-primary eth0 
+
+iface eth1 inet manual
+  bond-master bond0
+  bond-primary eth0 
+  wpa-conf /etc/wlan.conf
+
+iface eth2 inet manual
+  bond-master bond0
+  bond-primary eth0
+  wpa-conf /etc/wlan.conf
+
+iface wlan0 inet manual
+  bond-master bond0
+  bond-primary eth0 
+  wpa-conf /etc/wlan.conf
+
+iface wlan1 inet manual
+  bond-master bond0
+  bond-primary eth0 
+  wpa-conf /etc/wlan.conf
+

@@ -1,0 +1,7 @@
+name: Firefox
+category: Internet
+text: >-
+  Firefox ist ein weit verbreiteter Webbrowser.
+default: false
+apt: [ firefox, firefox-locale-de ]
+

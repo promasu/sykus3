@@ -1,0 +1,8 @@
+auth  required  pam_script.so dir=/usr/lib/sykus3/pam
+auth  required  pam_env.so readenv=1
+auth  required  pam_env.so readenv=1 envfile=/etc/sykus_env
+auth  required  pam_env.so readenv=1 envfile=/etc/default/locale
+account required  pam_permit.so
+session required  pam_permit.so
+session required  pam_script.so dir=/usr/lib/sykus3/pam
+

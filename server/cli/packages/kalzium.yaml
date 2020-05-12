@@ -1,0 +1,7 @@
+name: Kalzium
+category: Chemie
+text: >-
+  Kalzium ist ein interaktives Periodensystem der Elemente.
+default: false
+apt: [ kalzium, kde-l10n-de ]
+

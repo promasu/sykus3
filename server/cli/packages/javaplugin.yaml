@@ -1,0 +1,7 @@
+name: Java JRE und Browser Plugin
+category: System
+text: >-
+  Installiert das Java JRE und das entsprechende Browser-Plugin.
+default: false
+apt: [ icedtea-plugin ]
+

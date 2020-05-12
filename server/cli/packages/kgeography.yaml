@@ -1,0 +1,8 @@
+name: KGeography
+category: Geografie
+text: >-
+  KGeography ist ein Lern- und Übungsprogramm, das die Topographie auf 
+  der Ebene politischer Verwaltungsgebiete trainiert.
+default: false
+apt: [ kgeography, kde-l10n-de ]
+

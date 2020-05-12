@@ -1,0 +1,20 @@
+<h3 class="popover-title">
+  {{data.name}}
+</h3>
+<div class="popover-content">
+  <a href="#admin/printers/PrinterUpdate!{{data.id}}" 
+    class="btn btn-block btn-primary">
+    <i class="icon-edit"></i>
+    {{iPrinters.updatePrinterShort}}
+  </a>
+
+  <button class="btn btn-block btn-warning js-btn-reset">
+    <i class="icon-refresh"></i>
+    {{iPrinters.resetPrinter}}
+  </button>
+
+  <button class="btn btn-block btn-danger js-btn-delete">
+    <i class="icon-remove"></i>
+    {{iPrinters.deletePrinterShort}}
+  </button>
+</div>

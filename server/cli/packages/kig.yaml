@@ -1,0 +1,7 @@
+name: Kig
+category: Mathematik
+text: >-
+  Kig ist eine Lernsoftware für interaktive Geometrie.
+default: false
+apt: [ kig, kde-l10n-de ]
+

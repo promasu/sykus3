@@ -1,0 +1,19 @@
+<h3 class="popover-title">
+  {{data.name}}
+</h3>
+<div class="popover-content">
+  {{#data.selected}}
+  <button class="btn btn-block btn-danger js-btn-select">
+    <i class="icon-remove"></i>
+    {{iHosts.packageUnselect}}
+  </button>
+  {{/data.selected}}
+
+  {{^data.selected}}
+  <button class="btn btn-block btn-success js-btn-select">
+    <i class="icon-check"></i>
+    {{iHosts.packageSelect}}
+  </button>
+  {{/data.selected}}
+</div>
+

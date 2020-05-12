@@ -1,0 +1,10 @@
+name: Python-Programmierung
+category: Programmieren
+text: >-
+  Interpreter, Libraries und Tools zum Programmieren in Python.
+  Enthält Python 2.7, PyGame, Qt4, Tk, Pygments sowie den 
+  Qt-Designer.
+default: false
+apt: [ python2.7, python-pygame, python-qt4, python-pygments, 
+  python-tk, qt4-designer  ]
+

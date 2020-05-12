@@ -1,0 +1,2 @@
+CHROMIUM_FLAGS="--disk-cache-dir=/dev/null --disk-cache-size=1"
+

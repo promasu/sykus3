@@ -1,0 +1,11 @@
+source 'https://rubygems.org'
+
+gem 'bundler'
+gem 'thor'
+gem 'json'
+gem 'net-ssh'
+gem 'net-sftp'
+gem 'ruby-vnc', require: 'net/vnc'
+gem 'net-http-server', require: 'net/http/server'
+
+

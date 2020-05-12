@@ -1,0 +1,7 @@
+name: Blender
+category: Multimedia
+text: >-
+  Blender ist eine Software zum Erstellen von 3D-Modellen.
+default: false
+apt: [ blender ]
+

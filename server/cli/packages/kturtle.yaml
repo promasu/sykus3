@@ -1,0 +1,7 @@
+name: KTurtle
+category: Programmieren
+text: >-
+  KTurtle ist eine Lern-Programmierumgebung.
+default: false
+apt: [ kturtle, kde-l10n-de ]
+

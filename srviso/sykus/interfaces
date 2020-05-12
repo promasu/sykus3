@@ -1,0 +1,6 @@
+# The local network interface
+auto ethlan
+iface ethlan inet static
+  address 10.42.1.1
+  netmask 255.255.0.0
+

@@ -1,0 +1,40 @@
+<div class="col-xs-12 dashboard" id="dashboardRemote">
+  <div class="lead">
+    {{iRemote.webifTitle}}
+  </div>
+  <p>{{iRemote.webifText}}</p>
+  <input type="text" class="form-control js-webif-url" value="{{webifUrl}}">
+
+  <div class="lead">
+    {{iRemote.filesTitle}}
+  </div>
+
+  <p>{{{iRemote.filesText}}}</p>
+
+  <div class="input-group">
+    <select class="input-group-addon js-select-files-how">
+      <option value="linux">{{iRemote.filesLinux}}</option>
+      <option value="mac">{{iRemote.filesMac}}</option>
+      <option value="win">{{iRemote.filesWindows}}</option>
+    </select>
+
+    <input class="form-control js-input-files" type="text">
+  </div>
+
+  <div class="lead">
+    {{iRemote.proxyTitle}}
+  </div>
+  <p>{{{iRemote.proxyText}}}</p>
+
+  {{^student}}
+  <br>
+  <p>{{iRemote.proxyTextNonStudents}}</p>
+  {{/student}}
+
+  <div class="lead">
+    {{iRemote.wlanTitle}}
+  </div>
+  <p>{{{iRemote.wlanText}}}</p>
+
+</div>
+

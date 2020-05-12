@@ -1,0 +1,6 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=SMARTBoardService
+Exec="/opt/SMART Technologies/SMART Product Drivers/bin/SMARTBoardService"
+

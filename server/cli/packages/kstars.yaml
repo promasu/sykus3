@@ -1,0 +1,7 @@
+name: KStars
+category: Astronomie
+text: >-
+  KStars ist ein interaktives Planetarium.
+default: false
+apt: [ kstars, kde-l10n-de ]
+

@@ -1,0 +1,27 @@
+$:.unshift(File.dirname(__FILE__) + '/../')
+
+require 'common'
+require 'resque/tasks'
+require 'resque/failure/multiple'
+require 'resque/failure/redis'
+require 'resque_scheduler/tasks'
+
+Dir[File.dirname(__FILE__) + '/**/*_job.rb'].each { |f| require f }
+
+# error handling
+module Resque; module Failure
+  class MyLogger < Base
+    def save
+      Sykus::LOG.exception "Resque #{worker} #{queue} #{payload}", exception
+    end
+  end
+end; end
+
+Resque::Failure::Multiple.classes = 
+  [ Resque::Failure::Redis, Resque::Failure::MyLogger ]
+Resque::Failure.backend = Resque::Failure::Multiple
+
+# scheduler
+Resque.schedule = YAML.load_file \
+  (File.dirname(__FILE__) + '/../config/resque_schedule.yaml')
+

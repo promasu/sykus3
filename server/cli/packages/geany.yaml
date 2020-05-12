@@ -1,0 +1,7 @@
+name: Geany
+category: Texteditor
+text: >-
+  Geany ist ein erweiterter Texteditor.
+default: false
+apt: [ geany ]
+

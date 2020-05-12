@@ -1,0 +1,7 @@
+name: VLC Media Player
+category: Multimedia
+text: >-
+  VLC ist ein freier Medienplayer für fast alle Formate.
+default: true
+apt: [ vlc, libdvdread4 ]
+

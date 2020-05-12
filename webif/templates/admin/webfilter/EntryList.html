@@ -1,0 +1,38 @@
+<div class="col-xs-12">
+  <div class="lead">
+    {{iWebfilter.entryListTitle}}
+  </div>
+
+  <div id="EntryListTable">
+    <div class="row margin-row">
+      {{>gridFilter}}
+
+      <div class="col-lg-6 col-sm-4 col-xs-12 text-right">
+        <a href="#admin/webfilter/EntryCreate" 
+          class="btn btn-primary js-btn-create hide">
+          {{iWebfilter.entryCreateBtn}}
+        </a>
+      </div>
+    </div>
+
+    <table class="table table-striped table-bordered table-hover">
+      <thead>
+        <tr>
+          <th data-sort-field="domain">{{iWebfilter.entryDomain}}</th>
+          <th data-sort-field="comment">{{iWebfilter.entryComment}}</th>
+          <th data-sort-field="type">{{iWebfilter.entryType}}</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th colspan="100">
+            {{iGrid.noResults}}
+          </th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+

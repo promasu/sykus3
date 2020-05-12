@@ -1,0 +1,29 @@
+<h3 class="popover-title">
+  {{state}}  
+</h3>
+<div class="popover-content">
+  {{#isIdle}}
+  {{iHosts.imagePopoverIdleText}}
+  <br>
+  <br>
+  <button class="btn btn-block btn-primary js-btn-create">
+    <i class="icon-time"></i>
+    {{iHosts.imagePopoverCreateLater}}
+  </button>
+  <button class="btn btn-block btn-danger js-btn-create-now">
+    <i class="icon-bolt"></i>
+    {{iHosts.imagePopoverCreateNow}}
+  </button>
+  {{/isIdle}}
+
+  {{^isIdle}}
+  {{iHosts.imagePopoverRunningText}}
+  <br>
+  <br>
+  <button class="btn btn-block btn-danger js-btn-abort">
+    <i class="icon-remove"></i>
+    {{iHosts.imagePopoverAbort}}
+  </button>
+  {{/isIdle}}
+</div>
+

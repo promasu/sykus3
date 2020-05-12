@@ -1,0 +1,7 @@
+name: KmPlot
+category: Mathematik
+text: >-
+  KmPlot ist ein mathematischer Funktionsplotter.
+default: false
+apt: [ kmplot, kde-l10n-de ]
+

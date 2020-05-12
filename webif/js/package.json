@@ -1,0 +1,6 @@
+{
+  "name": "app",
+  "main": "main",
+  "dojoBuild": "package.js"
+}
+

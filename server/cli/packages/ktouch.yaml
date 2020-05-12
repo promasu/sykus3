@@ -1,0 +1,7 @@
+name: KTouch
+category: Lernsoftware
+text: >-
+  KTouch ist eine Lernsoftware zum 10-Finger-Tippen.
+default: false
+apt: [ ktouch, kde-l10n-de ]
+

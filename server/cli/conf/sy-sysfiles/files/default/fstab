@@ -1,0 +1,6 @@
+proc        /proc       proc    nodev,noexec,nosuid     0 0
+/dev/sda1   /           ext4    defaults                0 0
+/dev/sda2   none        swap    sw                      0 0
+none        /tmp        tmpfs   nodev,size=1G           0 0
+none        /var/tmp    tmpfs   nodev,size=1G           0 0
+

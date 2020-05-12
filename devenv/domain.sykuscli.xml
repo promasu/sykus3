@@ -1,0 +1,38 @@
+<domain type='kvm'>
+  <name>sykuscli</name>
+  <vcpu>2</vcpu>
+  <cpu mode='host-passthrough'>
+    <topology sockets='1' cores='2' threads='1' />
+  </cpu>
+  <memory unit='GiB'>1</memory>
+  <os>
+    <type arch='i686' machine='pc'>hvm</type>
+    <boot dev='network' />
+    <boot dev='hd' />
+  </os>
+  <features>
+    <pae />
+    <acpi />
+  </features>
+  <devices>
+    <!-- do not use virtio to prevent lilo fail (hardcoded to sda) -->
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qed' cache='none' />
+      <source file='{{BASEDIR}}/disks/sykuscli.qed' />
+      <target dev='sda' bus='ide' />
+    </disk>
+    <interface type='network'>
+      <model type='virtio' />
+      <mac address='00:ca:fe:ba:be:42' />
+      <source network='sykuslan' />
+    </interface>
+    <graphics type='vnc' port='6666' listen='127.0.0.1' keymap='de'>
+      <listen type='address' address='127.0.0.1' />
+    </graphics>
+    <video>
+      <model type='vga' heads='1' />
+    </video>
+     <sound model='ac97' />
+  </devices>
+</domain>
+

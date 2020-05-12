@@ -1,0 +1,9 @@
+#!/bin/bash
+
+rm -f /var/lib/sykus3/user.json
+restart sykus3-daemon
+
+umount -t cifs -a
+
+exit 0
+

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rm -f /var/lib/sykus3/user.json
+restart sykus3-daemon
+
+exit 0
+

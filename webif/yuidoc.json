@@ -1,0 +1,7 @@
+{
+  "name": "Sykus WebIF",
+  "options": {
+    "paths": "js",
+    "outdir": "./release/jsdoc"
+  }
+}

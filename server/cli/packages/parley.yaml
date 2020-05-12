@@ -1,0 +1,7 @@
+name: Parley
+category: Lernsoftware
+text: >-
+  Parley ist einer Vokabeltrainer-Software.
+default: false
+apt: [ parley, kde-l10n-de ]
+

@@ -1,0 +1,8 @@
+name: GCompris
+category: Lernsoftware
+text: >-
+  GCompris ist eine Lernsoftware für Grundschüler mit vielen verschiedenen
+  Aufgabentypen.
+default: false
+apt: [ gcompris, gcompris-sound-de ]
+

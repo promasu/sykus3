@@ -1,0 +1,7 @@
+name: KAlgebra
+category: Mathematik
+text: >-
+  KAlgebra ist ein umfangreicher grafischer Taschenrechner.
+default: false
+apt: [ kalgebra, kde-l10n-de ]
+

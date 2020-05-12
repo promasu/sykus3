@@ -1,0 +1,10 @@
+name: SMART Board Treiber + Notebook Software
+category: System
+text: >-
+  Installiert die SMART Board Treiber und die Notebook Software.
+  Bitte beachten Sie die Lizenzbedingungen des Herstellers.
+  Sie können einen Produktschlüssel für die Notebook Software
+  im Einstellungsmenü eintragen. Ohne gültigen Schlüssel wird die  
+  Testversion installiert.
+default: false
+

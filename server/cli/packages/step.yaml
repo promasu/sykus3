@@ -1,0 +1,7 @@
+name: Step
+category: Physik
+text: >-
+  Step ist eine Simulationssoftware für 2D-Physikversuche.
+default: false
+apt: [ step, kde-l10n-de ]
+

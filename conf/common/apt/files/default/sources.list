@@ -1,0 +1,8 @@
+deb http://de.archive.ubuntu.com/ubuntu/ saucy main restricted
+deb http://de.archive.ubuntu.com/ubuntu/ saucy-updates main restricted
+deb http://de.archive.ubuntu.com/ubuntu/ saucy universe
+deb http://de.archive.ubuntu.com/ubuntu/ saucy-updates universe
+
+deb http://security.ubuntu.com/ubuntu saucy-security main restricted
+deb http://security.ubuntu.com/ubuntu saucy-security universe
+
