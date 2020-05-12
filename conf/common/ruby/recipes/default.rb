@@ -10,6 +10,10 @@ package 'libsqlite3-0' do
   version '3.7.17-1ubuntu1'
 end
 
+package 'libyaml-0-2' do
+  version '0.1.4-2ubuntu0.12.10.3'
+end
+
 %w{
   ruby2.0 build-essential zlib1g-dev libssl-doc libssl-dev libsqlite3-dev libyaml-dev
   libxml2-dev libmysqlclient-dev ruby2.0-dev libxslt1-dev ruby-switch
