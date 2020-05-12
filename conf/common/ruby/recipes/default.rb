@@ -11,7 +11,7 @@ package 'libsqlite3-0' do
 end
 
 package 'libyaml-0-2' do
-  version '0.1.4-2ubuntu0.12.10.3'
+  version '0.1.4-2ubuntu0.13.10.3'
 end
 
 %w{
