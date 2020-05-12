@@ -6,6 +6,10 @@ package 'zlib1g' do
   version '1:1.2.8.dfsg-1ubuntu1'
 end
 
+package 'libsqlite3-0' do
+  version '3.7.17-1ubuntu1'
+end
+
 %w{
   ruby2.0 build-essential zlib1g-dev libssl-doc libssl-dev libsqlite3-dev libyaml-dev
   libxml2-dev libmysqlclient-dev ruby2.0-dev libxslt1-dev ruby-switch
