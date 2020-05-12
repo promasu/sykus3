@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-VANILLA_ISO="https://releases.ubuntu.com/14.04/ubuntu-14.04.6-server-amd64.iso"
-VANILLA_ISO_MD5="e750536067b6fff7f9934a13466fe2db"
+VANILLA_ISO="http://releases.ubuntu.com/13.10/ubuntu-13.10-server-amd64.iso"
+VANILLA_ISO_MD5="4d1a8b720cdd14b76ed9410c63a00d0e"
 
 # get vanilla image
 cd $(dirname $0)
