@@ -1,8 +1,8 @@
-deb http://de.archive.ubuntu.com/ubuntu/ saucy main restricted
-deb http://de.archive.ubuntu.com/ubuntu/ saucy-updates main restricted
-deb http://de.archive.ubuntu.com/ubuntu/ saucy universe
-deb http://de.archive.ubuntu.com/ubuntu/ saucy-updates universe
+deb http://de.archive.ubuntu.com/ubuntu/ trusty main restricted
+deb http://de.archive.ubuntu.com/ubuntu/ trusty-updates main restricted
+deb http://de.archive.ubuntu.com/ubuntu/ trusty universe
+deb http://de.archive.ubuntu.com/ubuntu/ trusty-updates universe
 
-deb http://security.ubuntu.com/ubuntu saucy-security main restricted
-deb http://security.ubuntu.com/ubuntu saucy-security universe
-
+deb http://security.ubuntu.com/ubuntu trusty-security main restricted
+deb http://security.ubuntu.com/ubuntu trusty-security universe
+deb http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu trusty main
