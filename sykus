@@ -41,7 +41,7 @@ class Sykus < Thor
           ssh.sftp.upload! dir, "/home/sykus3/#{dir}"
         end
 
-        ssh.exec! 'which chef-solo || gem install chef'
+        ssh.exec! 'which chef-solo || gem install chef -v 12.8.1'
 
         ssh.exec! \
           ('cd /home/sykus3/conf; chef-solo -c buildsrv.rb -j main.json') \
