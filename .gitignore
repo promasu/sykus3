@@ -1,4 +1,4 @@
-dist/
+dist/*
 build/cli/iso/
 build/cli/.bundle/
 build/sni/dist/
